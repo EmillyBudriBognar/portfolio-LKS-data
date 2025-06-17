@@ -57,6 +57,18 @@ const Footer = () => {
             <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">Terms of Service</a>
           </div>
         </div>
+        
+        {/* Discreet "Made by" credit */}
+        <div className="mt-6 text-center">
+          <a 
+            href="https://budri.com.br" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-gray-400 text-xs transition-colors"
+          >
+            Made by Budri 
+          </a>
+        </div>
       </div>
     </footer>
   );
