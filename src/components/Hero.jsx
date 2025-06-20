@@ -5,6 +5,73 @@ import { ChevronDown, Github, Linkedin, FileText, Sparkles, Rocket, BarChart2, D
 import Link from 'next/link';
 import { useEffect } from 'react';
 
+// Componente reutilizável para botões
+const ActionButton = ({ 
+  children, 
+  href, 
+  variant = 'primary',
+  icon,
+  className = '',
+  ...props 
+}) => {
+  const variants = {
+    primary: 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30',
+    secondary: 'border border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10 text-foreground backdrop-blur-sm',
+  };
+
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+      className={`${className}`}
+    >
+      <Link
+        href={href}
+        className={`px-6 py-3 md:px-8 md:py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${variants[variant]}`}
+        {...props}
+      >
+        {icon && <span className="flex-shrink-0">{icon}</span>}
+        <span>{children}</span>
+      </Link>
+    </motion.div>
+  );
+};
+
+// Componente reutilizável para ícones sociais
+const SocialIcon = ({ icon, url, tooltip, color }) => {
+  return (
+    <motion.a
+      href={url}
+      className={`p-3 text-gray-400 ${color} transition-all duration-300 relative group rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 flex items-center justify-center`}
+      whileHover={{ y: -5, scale: 1.1 }}
+      aria-label={tooltip}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {icon}
+      <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-foreground bg-background px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity border border-foreground/10 shadow-sm whitespace-nowrap">
+        {tooltip}
+      </span>
+    </motion.a>
+  );
+};
+
+// Componente reutilizável para o badge
+const HighlightBadge = ({ children }) => {
+  return (
+    <motion.div
+      className="inline-flex items-center px-4 py-2 mb-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm rounded-full border border-white/10 shadow-lg shadow-purple-500/5"
+      whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' }}
+      transition={{ type: 'spring', stiffness: 300 }}
+    >
+      <Sparkles className="text-purple-400 mr-2" size={16} />
+      <span className="text-sm font-medium text-foreground">{children}</span>
+      <Rocket className="ml-2 text-blue-400" size={16} />
+    </motion.div>
+  );
+};
+
 const Hero = () => {
   const controls = useAnimation();
   const textControls = useAnimation();
@@ -17,7 +84,6 @@ const Hero = () => {
         transition: { duration: 0.6 }
       });
       
-      // Animação de digitação para o subtítulo
       await textControls.start({
         opacity: 1,
         transition: { duration: 0.5 }
@@ -62,7 +128,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-background text-foreground">
+    <section className="relative h-screen w-full mt-18 overflow-hidden flex items-center justify-center bg-background text-foreground px-4">
       {/* Fundo com noise texture e gradiente dinâmico */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950">
         <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
@@ -76,43 +142,35 @@ const Hero = () => {
       
       {/* Ícones flutuantes */}
       <motion.div 
-        className="absolute top-20 left-20 text-blue-400/20"
+        className="absolute top-20 left-10 md:left-20 text-blue-400/20"
         variants={floatingVariants}
         animate="float"
       >
-        <DatabaseZap size={80} />
+        <DatabaseZap className="w-12 h-12 md:w-20 md:h-20" />
       </motion.div>
       <motion.div 
-        className="absolute bottom-40 right-32 text-purple-400/20"
+        className="absolute bottom-40 right-10 md:right-32 text-purple-400/20"
         variants={floatingVariants}
         animate="float"
         style={{ animationDelay: '2s' }}
       >
-        <BarChart2 size={80} />
+        <BarChart2 className="w-12 h-12 md:w-20 md:h-20" />
       </motion.div>
       
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 text-center relative z-10 flex flex-col items-center justify-center h-full">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto w-full"
         >
-          {/* Badge de destaque premium */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center px-4 py-2 mb-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm rounded-full border border-white/10 shadow-lg shadow-purple-500/5"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <Sparkles className="text-purple-400 mr-2" size={16} />
-            <span className="text-sm font-medium text-foreground">SOLUÇÕES EM DADOS DE ALTO IMPACTO</span>
-            <Rocket className="ml-2 text-blue-400" size={16} />
+          <motion.div variants={itemVariants}>
+            <HighlightBadge>SOLUÇÕES EM DADOS DE ALTO IMPACTO</HighlightBadge>
           </motion.div>
           
           {/* Título principal com efeito brilhante */}
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
             variants={itemVariants}
           >
             <span className="text-gradient bg-gradient-to-r from-purple-400 via-blue-400 to-teal-300 bg-clip-text text-transparent">
@@ -129,7 +187,7 @@ const Hero = () => {
           
           {/* Subtítulo com animação de digitação */}
           <motion.p
-            className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed"
             variants={itemVariants}
             initial={{ opacity: 0 }}
             animate={textControls}
@@ -144,67 +202,57 @@ const Hero = () => {
           
           {/* Botões premium */}
           <motion.div
-            className="flex flex-wrap justify-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full"
             variants={itemVariants}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            <ActionButton 
+              href="#projects" 
+              variant="primary"
+              icon={<Rocket size={18} />}
+              className="w-full sm:w-auto"
             >
-              <Link
-                href="#projects"
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all duration-200 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30 flex items-center gap-2"
-              >
-                <Rocket size={18} />
-                <span>Explorar Soluções</span>
-              </Link>
-            </motion.div>
+              Explorar Soluções
+            </ActionButton>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            <ActionButton 
+              href="#contact" 
+              variant="secondary"
+              icon={<BarChart2 size={18} />}
+              className="w-full sm:w-auto"
             >
-              <Link
-                href="#contact"
-                className="px-8 py-3 border border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10 text-foreground rounded-lg font-medium transition-all duration-200 backdrop-blur-sm flex items-center gap-2"
-              >
-                <BarChart2 size={18} />
-                <span>Consultoria Especializada</span>
-              </Link>
-            </motion.div>
+              Consultoria Especializada
+            </ActionButton>
           </motion.div>
           
           {/* Redes sociais com hover expandido */}
           <motion.div
-            className="flex justify-center space-x-6"
+            className="flex justify-center gap-4 sm:gap-6"
             variants={itemVariants}
           >
-            {[
-              { icon: <Github size={22} />, url: "https://github.com/lksdata", tooltip: "GitHub", color: "hover:text-purple-400" },
-              { icon: <Linkedin size={22} />, url: "https://linkedin.com/in/lksdata", tooltip: "LinkedIn", color: "hover:text-blue-400" },
-              { icon: <FileText size={22} />, url: "#", tooltip: "Currículo", color: "hover:text-teal-400" }
-            ].map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.url}
-                className={`p-3 text-gray-400 ${item.color} transition-all duration-300 relative group rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20`}
-                whileHover={{ y: -5, scale: 1.1 }}
-                aria-label={item.tooltip}
-              >
-                {item.icon}
-                <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-foreground bg-background px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity border border-foreground/10 shadow-sm whitespace-nowrap">
-                  {item.tooltip}
-                </span>
-              </motion.a>
-            ))}
+            <SocialIcon 
+              icon={<Github size={20} />} 
+              url="https://github.com/lksdata" 
+              tooltip="GitHub" 
+              color="hover:text-purple-400" 
+            />
+            <SocialIcon 
+              icon={<Linkedin size={20} />} 
+              url="https://linkedin.com/in/lksdata" 
+              tooltip="LinkedIn" 
+              color="hover:text-blue-400" 
+            />
+            <SocialIcon 
+              icon={<FileText size={20} />} 
+              url="#" 
+              tooltip="Currículo" 
+              color="hover:text-teal-400" 
+            />
           </motion.div>
         </motion.div>
         
         {/* Scroll indicator premium */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="mt-8 sm:mt-12 mb-4 sm:mb-0"
           animate={{ 
             y: [0, 15, 0],
             opacity: [0.6, 1, 0.6]
