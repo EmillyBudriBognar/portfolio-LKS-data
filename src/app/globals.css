@@ -17,8 +17,8 @@
 
 /* 🎨 Definindo variáveis de tema */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000; /* preto */
+  --foreground: #ededed; /* texto claro para contraste */
   
   --font-title: 'Orbitron', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
