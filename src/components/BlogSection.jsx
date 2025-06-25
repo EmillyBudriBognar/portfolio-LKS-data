@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import SectionHeader from './SectionHeader';
 import ArticleCard from './ArticleCard';
 
-const BlogSection = ({ language = 'en' }) => { // Default to 'en' if no language prop is passed
+const BlogSection = ({ language = 'en' }) => {
+  // Hook para detectar quando a seção de blog entra no campo de visão, disparando animações uma única vez.
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  // Blog content in both languages
+  // Conteúdo dos artigos e textos da seção, organizado por idioma para fácil internacionalização.
   const content = {
     en: {
       sectionHeader: {
@@ -67,12 +67,13 @@ const BlogSection = ({ language = 'en' }) => { // Default to 'en' if no language
     }
   };
 
+  // Seleciona o conteúdo baseado no idioma atual.
   const currentContent = content[language];
 
   return (
     <section id="blog" ref={ref} className="py-20 bg-gray-800">
       <div className="container mx-auto px-6">
-        <SectionHeader 
+        <SectionHeader
           title={currentContent.sectionHeader.title}
           subtitle={currentContent.sectionHeader.subtitle}
           inView={inView}
@@ -82,7 +83,8 @@ const BlogSection = ({ language = 'en' }) => { // Default to 'en' if no language
           {currentContent.articles.map((article) => (
             <ArticleCard
               key={article.id}
-              article={article}  // Passando o objeto article completo
+              id={article.id} // É importante passar o `id` para o `ArticleCard` para o delay sequencial.
+              article={article}
               readMoreText={currentContent.readMore}
               inView={inView}
             />

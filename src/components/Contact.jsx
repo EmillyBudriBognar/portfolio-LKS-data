@@ -10,17 +10,18 @@ import ActionButton from './ActionButton';
 
 const Contact = ({ language = "pt" }) => {
   const controls = useAnimation();
+  // Detecta quando a seção entra na visualização para disparar as animações uma vez.
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
-  // EmailJS configuration
+  // Credenciais do EmailJS para envio de formulários.
   const serviceId = "service_wk64lqt";
   const templateId = "template_nh38c9c";
   const publicKey = "VMnVTWjFgDZujPudf";
 
-  // Form state
+  // Estado do formulário e feedback de status (enviando, sucesso, erro).
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -28,16 +29,17 @@ const Contact = ({ language = "pt" }) => {
     subject: "",
     message: ""
   });
+  const [status, setStatus] = useState(""); // Gerencia o estado da submissão: "", "sending", "success", "error".
+  const [errors, setErrors] = useState({}); // Armazena erros de validação do formulário.
 
-  const [status, setStatus] = useState("");
-  const [errors, setErrors] = useState({});
-
+  // Inicia a animação da seção quando ela entra na visualização.
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
 
+  // Controla o overflow do body para desabilitar a rolagem quando o modal de status está ativo.
   useEffect(() => {
     if (status === "success" || status === "error") {
       document.body.classList.add("overflow-hidden");
@@ -46,6 +48,7 @@ const Contact = ({ language = "pt" }) => {
     }
   }, [status]);
 
+  // Variantes de animação para o container e itens.
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -62,7 +65,7 @@ const Contact = ({ language = "pt" }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         type: "spring",
         stiffness: 120,
         damping: 12,
@@ -71,9 +74,9 @@ const Contact = ({ language = "pt" }) => {
     }
   };
 
-  // Format phone number
+  // Formata o número de telefone para um padrão comum (ex: (XX) XXXX-XXXX).
   const formatPhoneNumber = (phoneNumber) => {
-    phoneNumber = phoneNumber.replace(/\D/g, "");
+    phoneNumber = phoneNumber.replace(/\D/g, ""); // Remove não-dígitos
     if (phoneNumber.length > 11) phoneNumber = phoneNumber.slice(0, 11);
 
     return phoneNumber.length <= 10
@@ -81,17 +84,20 @@ const Contact = ({ language = "pt" }) => {
       : phoneNumber.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
   };
 
+  // Lida com a mudança nos inputs do formulário e limpa erros se o campo for alterado.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    // Limpa o erro do campo assim que o usuário começa a digitar.
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
   };
 
+  // Valida os campos do formulário e define mensagens de erro se necessário.
   const validateForm = () => {
     const newErrors = {};
     if (!formData.fullName.trim()) newErrors.fullName = translations[language].errors.required;
@@ -101,14 +107,15 @@ const Contact = ({ language = "pt" }) => {
     if (!formData.message.trim()) newErrors.message = translations[language].errors.required;
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length === 0; // Retorna true se não houver erros.
   };
 
+  // Lida com o envio do formulário, validação e integração com EmailJS.
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) return; // Aborta se a validação falhar.
 
-    setStatus("sending");
+    setStatus("sending"); // Indica que o envio está em andamento.
 
     const formattedPhone = formatPhoneNumber(formData.phoneNumber);
 
@@ -122,7 +129,8 @@ const Contact = ({ language = "pt" }) => {
 
     emailjs.send(serviceId, templateId, templateParams, publicKey).then(
       () => {
-        setStatus("success");
+        setStatus("success"); // Define o status para sucesso.
+        // Limpa o formulário após o envio bem-sucedido.
         setFormData({
           fullName: "",
           email: "",
@@ -133,11 +141,12 @@ const Contact = ({ language = "pt" }) => {
       },
       (error) => {
         console.error("Error sending email: ", error.text);
-        setStatus("error");
+        setStatus("error"); // Define o status para erro.
       }
     );
   };
 
+  // Conteúdo textual da seção, separado por idioma para internacionalização.
   const translations = {
     pt: {
       title: "Entre em Contato",
@@ -244,11 +253,11 @@ const Contact = ({ language = "pt" }) => {
   };
 
   const validLanguage = translations[language] ? language : 'pt';
-  const { 
-    title, 
-    subtitle, 
-    contactTitle, 
-    contactItems, 
+  const {
+    title,
+    subtitle,
+    contactTitle,
+    contactItems,
     formLabels,
     placeholders,
     errors: errorMessages,
@@ -259,13 +268,13 @@ const Contact = ({ language = "pt" }) => {
   return (
     <section id="contact" className="py-20 bg-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader 
+        <SectionHeader
           title={title}
           subtitle={subtitle}
           inView={inView}
         />
 
-        <motion.div 
+        <motion.div
           ref={ref}
           initial="hidden"
           animate={controls}
@@ -274,13 +283,13 @@ const Contact = ({ language = "pt" }) => {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <motion.h3 
+              <motion.h3
                 variants={itemVariants}
                 className="text-xl font-semibold text-white"
               >
                 {contactTitle}
               </motion.h3>
-              
+
               <div className="space-y-4">
                 {contactItems.map((item, index) => (
                   <motion.div
@@ -298,10 +307,10 @@ const Contact = ({ language = "pt" }) => {
                 ))}
               </div>
             </div>
-            
+
             <div>
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Full Name */}
+                {/* Campos do formulário */}
                 <motion.div variants={itemVariants}>
                   <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-1">
                     {formLabels.fullName}
@@ -322,9 +331,7 @@ const Contact = ({ language = "pt" }) => {
                   )}
                 </motion.div>
 
-                {/* Phone and Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Phone */}
                   <motion.div variants={itemVariants}>
                     <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-300 mb-1">
                       {formLabels.phone}
@@ -345,7 +352,6 @@ const Contact = ({ language = "pt" }) => {
                     )}
                   </motion.div>
 
-                  {/* Email */}
                   <motion.div variants={itemVariants}>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                       {formLabels.email}
@@ -367,7 +373,6 @@ const Contact = ({ language = "pt" }) => {
                   </motion.div>
                 </div>
 
-                {/* Subject */}
                 <motion.div variants={itemVariants}>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-1">
                     {formLabels.subject}
@@ -388,7 +393,6 @@ const Contact = ({ language = "pt" }) => {
                   )}
                 </motion.div>
 
-                {/* Message */}
                 <motion.div variants={itemVariants}>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
                     {formLabels.message}
@@ -409,17 +413,17 @@ const Contact = ({ language = "pt" }) => {
                   )}
                 </motion.div>
 
-                {/* Submit Button */}
                 <div className="flex justify-center">
                   <ActionButton
                     asButton={true}
                     type="submit"
                     variant="primary"
                     className="mt-2 "
-                    disabled={status === "sending"}
+                    disabled={status === "sending"} // Desabilita o botão enquanto o email está sendo enviado.
                   >
                     {status === "sending" ? (
                       <span className="flex items-center justify-center">
+                        {/* Ícone de carregamento para feedback visual */}
                         <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -436,7 +440,7 @@ const Contact = ({ language = "pt" }) => {
           </div>
         </motion.div>
 
-        {/* Success/Error Modal */}
+        {/* Modal de sucesso/erro que aparece após o envio do formulário. */}
         <AnimatePresence>
           {(status === "success" || status === "error") && (
             <motion.div
@@ -444,16 +448,17 @@ const Contact = ({ language = "pt" }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50 p-4"
-              onClick={() => setStatus("")}
+              onClick={() => setStatus("")} // Fecha o modal ao clicar fora.
             >
               <motion.div
                 className="bg-gray-900 rounded-xl p-6 w-full max-w-md text-center shadow-xl border border-gray-700"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()} // Impede que o clique dentro do modal feche-o.
               >
                 <div className="mb-4">
+                  {/* Ícones de sucesso ou erro, dependendo do status. */}
                   {status === "success" ? (
                     <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
                       <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

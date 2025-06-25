@@ -7,7 +7,7 @@ import { Globe, Mail, Linkedin, Github } from 'lucide-react';
 import Image from "next/image";
 
 const Footer = ({ language = "en" }) => {
-  // Textos traduzidos para cada idioma
+  // Objeto de traduções para suportar múltiplos idiomas no rodapé.
   const translations = {
     pt: {
       aboutTitle: "SOBRE",
@@ -49,7 +49,7 @@ const Footer = ({ language = "en" }) => {
     },
   };
 
-  // Seleciona o texto com base no idioma
+  // Desestrutura os textos traduzidos com base no idioma selecionado.
   const {
     aboutTitle,
     aboutDescription,
@@ -60,7 +60,7 @@ const Footer = ({ language = "en" }) => {
     copyright,
   } = translations[language];
 
-  // Função para rolar suavemente até a seção
+  // Função para rolagem suave para as seções da página.
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -68,10 +68,10 @@ const Footer = ({ language = "en" }) => {
     }
   };
 
-  // Hook useInView para detectar quando a seção está visível
+  // Hook `useInView` para animar os elementos do rodapé quando entram na viewport.
   const { ref: footerRef, inView: footerInView } = useInView({
-    triggerOnce: true, 
-    threshold: 0.1, 
+    triggerOnce: true, // A animação ocorre apenas uma vez.
+    threshold: 0.1, // O elemento é considerado "em vista" quando 10% dele está visível.
   });
 
   return (
@@ -81,7 +81,7 @@ const Footer = ({ language = "en" }) => {
     >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About and Logo */}
+          {/* Seção Sobre e Logo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -100,6 +100,7 @@ const Footer = ({ language = "en" }) => {
             <p className="mt-4 text-gray-400">
               {aboutDescription}
             </p>
+            {/* Ícones de redes sociais */}
             <div className="flex space-x-4 mt-6">
               <a href="https://github.com/luca490" className="text-gray-400 hover:text-white transition-colors">
                 <Github size={20} />
@@ -112,8 +113,8 @@ const Footer = ({ language = "en" }) => {
               </a>
             </div>
           </motion.div>
-          
-          {/* Navigation Links */}
+
+          {/* Links de Navegação */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -123,7 +124,7 @@ const Footer = ({ language = "en" }) => {
             <ul className="space-y-2">
               {pageLinks.map((link) => (
                 <li key={link.name}>
-                  <a 
+                  <a
                     href={`#${link.link}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -137,8 +138,8 @@ const Footer = ({ language = "en" }) => {
               ))}
             </ul>
           </motion.div>
-          
-          {/* Contact Info */}
+
+          {/* Informações de Contato */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -160,8 +161,8 @@ const Footer = ({ language = "en" }) => {
             </address>
           </motion.div>
         </div>
-        
-        {/* Copyright */}
+
+        {/* Copyright e Crédito */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -171,12 +172,12 @@ const Footer = ({ language = "en" }) => {
           <p className="text-gray-500 text-sm">
             {copyright}
           </p>
-          
-          {/* Discreet "Made by" credit */}
+
+          {/* Crédito "Made by" discreto */}
           <div className="mt-4 md:mt-0">
-            <a 
-              href="https://budri.com.br" 
-              target="_blank" 
+            <a
+              href="https://budri.com.br"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-400 text-s transition-colors"
             >

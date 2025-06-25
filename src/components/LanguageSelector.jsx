@@ -10,13 +10,12 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   const [hover, setHover] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Objeto de traduções para o tooltip e as opções de idioma
   const translations = {
     en: {
       tooltip: 'Language',
       languageOptions: [
         { code: 'en', label: 'English' },
-        { code: 'pt', label: 'Portuguese' }, // Changed to Portuguese for consistency
+        { code: 'pt', label: 'Portuguese' },
       ],
     },
     pt: {
@@ -28,7 +27,6 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
     },
   };
 
-  // Selecione as traduções e as opções de idioma com base no idioma atual
   const currentTranslations = translations[language];
   const languages = currentTranslations.languageOptions;
 
@@ -38,6 +36,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   };
 
   useEffect(() => {
+    // Fecha o dropdown se o clique for fora do componente
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
@@ -52,18 +51,16 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Button */}
       <button
         onClick={() => setOpen(!open)}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className="p-2 rounded-full text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer"
-        aria-label={currentTranslations.tooltip} // Accessible label
+        aria-label={currentTranslations.tooltip}
       >
         <Globe size={20} className="relative z-10" />
       </button>
 
-      {/* Tooltip */}
       <AnimatePresence>
         {hover && (
           <motion.div
@@ -73,12 +70,11 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
             transition={{ duration: 0.2 }}
             className="absolute z-20 top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs font-medium bg-gray-800 text-yellow-400 px-2 py-1 rounded shadow-md whitespace-nowrap"
           >
-            {currentTranslations.tooltip} {/* Traduz o texto da bolha aqui */}
+            {currentTranslations.tooltip}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.ul
@@ -98,7 +94,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
                     : 'text-gray-300'
                 }`}
               >
-                {lang.label} {/* Traduz as opções de idioma aqui */}
+                {lang.label}
               </li>
             ))}
           </motion.ul>

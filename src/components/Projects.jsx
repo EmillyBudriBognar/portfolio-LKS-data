@@ -8,14 +8,14 @@ import { Database, LineChart, Code, Zap } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import SectionHeader from '../components/SectionHeader';
 
-const Projects = ({ language = 'en' }) => { // Default to 'en' if no language prop is passed
-  
+const Projects = ({ language = 'en' }) => {
+  // Hook para detectar se o componente está visível na tela, acionando a animação uma vez.
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.1, // Começa a animar quando 10% do componente está visível
   });
 
-  // Project data in both languages
+  // Dados dos projetos em diferentes idiomas para internacionalização.
   const projectData = {
     en: {
       sectionHeader: {
@@ -101,16 +101,18 @@ const Projects = ({ language = 'en' }) => { // Default to 'en' if no language pr
 
   const currentData = projectData[language];
 
+  // Variantes de animação para o contêiner dos projetos.
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.2, // Atraso na animação dos itens filhos
       },
     },
   };
 
+  // Variantes de animação para cada item individual de projeto.
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -128,12 +130,13 @@ const Projects = ({ language = 'en' }) => { // Default to 'en' if no language pr
         <SectionHeader
           title={currentData.sectionHeader.title}
           subtitle={currentData.sectionHeader.subtitle}
-          inView={inView}
+          inView={inView} // Passa o estado de visibilidade para o SectionHeader
         />
 
         <motion.div
           variants={container}
           initial="hidden"
+          // Anima os cards apenas quando a seção está visível
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >

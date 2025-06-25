@@ -9,17 +9,20 @@ import { useInView } from 'react-intersection-observer';
 
 const About = ({ language = "pt" }) => {
   const controls = useAnimation();
+  // Usa useInView para disparar animações quando a seção entra na tela, apenas uma vez.
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
+  // Inicia a animação controlada quando a seção se torna visível.
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
 
+  // Variantes para a animação do container principal, com escalonamento de filhos.
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -31,12 +34,13 @@ const About = ({ language = "pt" }) => {
     }
   };
 
+  // Variantes genéricas para itens, com um efeito de mola suave.
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         type: "spring",
         stiffness: 120,
         damping: 12,
@@ -45,12 +49,13 @@ const About = ({ language = "pt" }) => {
     }
   };
 
+  // Variantes para os cards (Educação, Experiência, Tecnologias), incluindo um efeito de elevação no hover.
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         type: "spring",
         stiffness: 120,
         damping: 12,
@@ -67,6 +72,7 @@ const About = ({ language = "pt" }) => {
     }
   };
 
+  // Variantes para os ícones de tecnologia, com feedback visual no hover.
   const techVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -87,19 +93,20 @@ const About = ({ language = "pt" }) => {
     }
   };
 
+  // Lista de tecnologias com ícones e cores para renderização dinâmica.
   const technologies = [
     { icon: <Server className="text-amber-400" size={20} />, name: "Python", color: "bg-amber-500/10" },
     { icon: <Cpu className="text-blue-400" size={20} />, name: "Java", color: "bg-blue-500/10" },
-    { icon: <Cog className="text-amber-400" size={20} />, name: "Spring Boot", color: "bg-amber-500/10" }, // Alterado para âmbar
-    { icon: <Database className="text-blue-400" size={20} />, name: "SQL", color: "bg-blue-500/10" }, // Alterado para azul
+    { icon: <Cog className="text-amber-400" size={20} />, name: "Spring Boot", color: "bg-amber-500/10" },
+    { icon: <Database className="text-blue-400" size={20} />, name: "SQL", color: "bg-blue-500/10" },
     { icon: <Database className="text-amber-300" size={20} />, name: "MongoDB", color: "bg-amber-400/10" },
     { icon: <Cloud className="text-blue-300" size={20} />, name: "AWS", color: "bg-blue-400/10" },
-    { icon: <Cloud className="text-amber-300" size={20} />, name: "Azure", color: "bg-amber-400/10" }, // Alterado para âmbar
-    { icon: <BarChart className="text-blue-400" size={20} />, name: "Power BI", color: "bg-blue-500/10" }, // Alterado para azul
-    { icon: <LineChart className="text-amber-400" size={20} />, name: "Google Analytics", color: "bg-amber-500/10" } // Alterado para âmbar
+    { icon: <Cloud className="text-amber-300" size={20} />, name: "Azure", color: "bg-amber-400/10" },
+    { icon: <BarChart className="text-blue-400" size={20} />, name: "Power BI", color: "bg-blue-500/10" },
+    { icon: <LineChart className="text-amber-400" size={20} />, name: "Google Analytics", color: "bg-amber-500/10" }
   ];
 
-
+  // Conteúdo textual da seção, separado por idioma para fácil internacionalização.
   const translations = {
     pt: {
       sectionHeader: {
@@ -135,7 +142,7 @@ const About = ({ language = "pt" }) => {
         title: "Tecnologias"
       },
       downloadButton: "Ver Currículo",
-      cvLink: "https://docs.google.com/document/d/1zE1D6_t4CZW1GT0rpOoqhhIH71V_F7VT/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true" // Link para versão em português
+      cvLink: "https://docs.google.com/document/d/1zE1D6_t4CZW1GT0rpOoqhhIH71V_F7VT/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true"
     },
     en: {
       sectionHeader: {
@@ -171,36 +178,37 @@ const About = ({ language = "pt" }) => {
         title: "Technologies"
       },
       downloadButton: "View Resume",
-      cvLink: "https://docs.google.com/document/d/1IYjTLMq5qCkwQ-NIw1_nZNCizCBUAsBR/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true" // Link para versão em inglês
+      cvLink: "https://docs.google.com/document/d/1IYjTLMq5qCkwQ-NIw1_nZNCizCBUAsBR/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true"
     },
   };
 
   const validLanguage = translations[language] ? language : 'pt';
-  const { 
-    sectionHeader, 
-    education, 
-    experience, 
-    technologies: techTexts, 
+  const {
+    sectionHeader,
+    education,
+    experience,
+    technologies: techTexts,
     downloadButton,
     cvLink
   } = translations[validLanguage];
 
   return (
     <section id="about" className="relative py-20 overflow-hidden bg-gray-900">
+      {/* Elementos de fundo para um efeito visual sutil de ruído e gradiente. */}
       <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.05 }}
         transition={{ duration: 1.5 }}
         className="absolute top-0 right-0 w-64 h-64 bg-amber-500 rounded-full mix-blend-overlay filter blur-[90px]"
       ></motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.05 }}
         transition={{ duration: 1.5, delay: 0.3 }}
         className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-overlay filter blur-[90px]"
       ></motion.div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           ref={ref}
@@ -209,14 +217,14 @@ const About = ({ language = "pt" }) => {
           variants={containerVariants}
           className="max-w-6xl mx-auto"
         >
-          <SectionHeader 
+          <SectionHeader
             title={sectionHeader.title}
             subtitle={sectionHeader.subtitle}
             inView={inView}
           />
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <motion.div 
+            <motion.div
               variants={cardVariants}
               whileHover="hover"
               className="lg:w-1/2 bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-amber-500/20 transition-all duration-300 hover:border-amber-500/30"
@@ -227,7 +235,7 @@ const About = ({ language = "pt" }) => {
                 </div>
                 <h3 className="text-xl font-semibold text-white ml-3">{education.title}</h3>
               </div>
-              
+
               <div className="space-y-5">
                 {education.items.map((item, index) => (
                   <div key={index} className="relative pl-7 border-l-2 border-amber-500/30 group">
@@ -240,11 +248,11 @@ const About = ({ language = "pt" }) => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="lg:w-1/2 space-y-6"
             >
-              <motion.div 
+              <motion.div
                 variants={cardVariants}
                 whileHover="hover"
                 className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:border-blue-500/30"
@@ -255,7 +263,7 @@ const About = ({ language = "pt" }) => {
                   </div>
                   <h3 className="text-xl font-semibold text-white ml-3">{experience.title}</h3>
                 </div>
-                
+
                 {experience.items.map((item, index) => (
                   <div key={index} className="relative pl-7 border-l-2 border-blue-500/30 group">
                     <div className="absolute -left-[8px] top-0 w-3.5 h-3.5 bg-blue-400 rounded-full transition-all duration-300 group-hover:scale-125"></div>
@@ -266,7 +274,7 @@ const About = ({ language = "pt" }) => {
                 ))}
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 variants={cardVariants}
                 whileHover="hover"
                 className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:border-teal-500/30"
@@ -277,7 +285,7 @@ const About = ({ language = "pt" }) => {
                   </div>
                   <h3 className="text-xl font-semibold text-white ml-3">{techTexts.title}</h3>
                 </div>
-                
+
                 <div className="grid grid-cols-3 gap-3">
                   {technologies.map((tech, index) => (
                     <motion.div
@@ -299,7 +307,6 @@ const About = ({ language = "pt" }) => {
             </motion.div>
           </div>
 
-          {/* Botão do currículo modificado */}
           <motion.div
             variants={itemVariants}
             className="text-center mt-12"
@@ -309,7 +316,7 @@ const About = ({ language = "pt" }) => {
               icon={<Download size={18} className="group-hover:animate-bounce" />}
               variant="primary"
               className="text-sm group"
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}

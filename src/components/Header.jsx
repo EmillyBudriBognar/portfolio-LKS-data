@@ -1,4 +1,3 @@
-// components/Header.js
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,11 +7,14 @@ import LanguageSelector from '../components/LanguageSelector';
 import Image from 'next/image';
 
 const Header = ({ language, onLanguageChange }) => {
+  // Estado para controlar a abertura/fechamento do menu mobile.
   const [isOpen, setIsOpen] = useState(false);
+  // Estado para controlar a visibilidade do cabeçalho (aparecer/desaparecer ao rolar).
   const [isVisible, setIsVisible] = useState(true);
+  // Estado para verificar se a página está no topo, para ajustar o estilo do cabeçalho.
   const [isTop, setIsTop] = useState(true);
 
-  // Objeto de traduções para os itens de navegação
+  // Objeto de traduções para os itens de navegação, permitindo fácil internacionalização.
   const translations = {
     en: {
       navItems: [
@@ -34,10 +36,10 @@ const Header = ({ language, onLanguageChange }) => {
     },
   };
 
-  // Selecione os itens de navegação com base no idioma atual
+  // Seleciona os itens de navegação com base no idioma atual.
   const navItems = translations[language].navItems;
 
-  // Smooth scroll
+  // Efeito para adicionar rolagem suave a todos os links internos.
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -51,7 +53,7 @@ const Header = ({ language, onLanguageChange }) => {
     });
   }, []);
 
-  // Header visibility on scroll
+  // Efeito para controlar a visibilidade do cabeçalho com base na direção da rolagem.
   useEffect(() => {
     let lastScroll = 0;
     let ticking = false;
@@ -61,14 +63,16 @@ const Header = ({ language, onLanguageChange }) => {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          // Atualiza se a página está no topo.
           setIsTop(currentScroll < 100);
 
+          // Lógica para mostrar/esconder o cabeçalho.
           if (currentScroll <= 100) {
-            setIsVisible(true);
+            setIsVisible(true); // Sempre visível no topo.
           } else if (currentScroll > lastScroll && currentScroll > 100) {
-            setIsVisible(false);
+            setIsVisible(false); // Esconde ao rolar para baixo.
           } else {
-            setIsVisible(true);
+            setIsVisible(true); // Mostra ao rolar para cima.
           }
 
           lastScroll = currentScroll;
@@ -79,10 +83,12 @@ const Header = ({ language, onLanguageChange }) => {
       }
     };
 
+    // Adiciona e remove o listener de scroll.
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Função para rolar para a seção clicada e fechar o menu mobile.
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId.replace('#', ''));
     if (section) {
@@ -90,13 +96,13 @@ const Header = ({ language, onLanguageChange }) => {
         top: section.offsetTop,
         behavior: 'smooth'
       });
-      setIsOpen(false);
+      setIsOpen(false); // Fecha o menu mobile após a navegação.
     }
   };
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* Overlay para o menu mobile, que escurece o fundo e permite fechar o menu ao clicar fora. */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -104,25 +110,26 @@ const Header = ({ language, onLanguageChange }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)} // Fecha o menu.
           />
         )}
       </AnimatePresence>
 
-      {/* Header */}
+      {/* Cabeçalho principal com animação de aparecer/desaparecer. */}
       <motion.header
-        animate={{ y: isVisible ? 0 : -100 }}
+        animate={{ y: isVisible ? 0 : -100 }} // Animação de slide in/out.
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className={`fixed top-0 left-0 w-full z-50 ${
-          !isTop ? "shadow-lg border-b border-gray-800" : ""
+          !isTop ? "shadow-lg border-b border-gray-800" : "" // Adiciona sombra/borda quando não está no topo.
         }`}
       >
         <div className="bg-gray-900/80 backdrop-blur-md">
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
+              {/* Logo e Título do Site */}
               <div
                 className="flex items-center cursor-pointer"
-                onClick={() => scrollToSection('#hero-section')}
+                onClick={() => scrollToSection('#hero-section')} // Rola para o topo ao clicar no logo.
               >
                 <div className="mr-3">
                   <Image src="/lks-logo.svg" alt="Logo" width={40} height={40} />
@@ -132,6 +139,7 @@ const Header = ({ language, onLanguageChange }) => {
                 </h4>
               </div>
 
+              {/* Menu de Navegação para Desktop */}
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8">
                   {navItems.map((item) => (
@@ -144,22 +152,24 @@ const Header = ({ language, onLanguageChange }) => {
                     </button>
                   ))}
                 </nav>
+                {/* Seletor de Idioma para Desktop */}
                 <LanguageSelector
                   language={language}
                   onLanguageChange={onLanguageChange}
                 />
               </div>
 
+              {/* Botão de Menu para Mobile */}
               <button
                 className="md:hidden text-gray-300 z-50"
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setIsOpen(!isOpen)} // Alterna o estado de abertura do menu mobile.
                 aria-label="Toggle menu"
               >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                {isOpen ? <X size={24} /> : <Menu size={24} />} {/* Ícone de X ou Menu */}
               </button>
             </div>
 
-            {/* Mobile menu */}
+            {/* Menu Mobile com Animações */}
             <AnimatePresence>
               {isOpen && (
                 <motion.div
@@ -183,6 +193,7 @@ const Header = ({ language, onLanguageChange }) => {
                       </motion.button>
                     ))}
                   </nav>
+                  {/* Seletor de Idioma para Mobile */}
                   <div className="flex items-center justify-between mt-4">
                     <LanguageSelector
                       language={language}
