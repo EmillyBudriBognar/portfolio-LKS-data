@@ -23,7 +23,7 @@ const SocialIcons = ({ language = 'en' }) => { // Aceita a prop language com def
       { 
         name: "Resume", // Nome do currículo em inglês
         icon: FileText, 
-        link: "https://example.com/resume-en.pdf", // Link para o currículo em inglês
+        link: "https://docs.google.com/document/d/1IYjTLMq5qCkwQ-NIw1_nZNCizCBUAsBR/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true", // Link para o currículo em inglês
         color: "text-teal-400/90"
       },
     ],
@@ -43,7 +43,7 @@ const SocialIcons = ({ language = 'en' }) => { // Aceita a prop language com def
       { 
         name: "Currículo", // Nome do currículo em português
         icon: FileText, 
-        link: "https://example.com/curriculo-pt.pdf", // Link para o currículo em português
+        link: "https://docs.google.com/document/d/1zE1D6_t4CZW1GT0rpOoqhhIH71V_F7VT/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true", // Link para o currículo em português
         color: "text-teal-400/90"
       },
     ],

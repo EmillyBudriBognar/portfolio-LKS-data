@@ -112,7 +112,7 @@ const Hero = ({ language = "pt" }) => {
   const { badge, companyName, description, buttons } = translations[language];
 
   return (
-    <section className="relative h-screen w-full mt-16 overflow-hidden flex items-center justify-center bg-background text-foreground px-4">
+    <section className="relative h-screen w-full mt-16 overflow-hidden flex items-center justify-center bg-gray-900 text-gray-50 px-4">
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900 to-gray-950">
         <div className="absolute inset-0 opacity-15 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>

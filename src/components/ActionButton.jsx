@@ -30,34 +30,37 @@ const ActionButton = ({
     ${className}
   `;
 
-  return (
-    <motion.div
-      whileHover={!disabled ? { scale: 1.05 } : {}}
-      whileTap={!disabled ? { scale: 0.95 } : {}}
-      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+  const MotionButton = motion.button;
+  const MotionLink = motion(Link);
+
+  const motionProps = !disabled ? {
+    whileHover: { scale: 1.05 },
+    whileTap: { scale: 0.95 },
+    transition: { type: "spring", stiffness: 300, damping: 15 }
+  } : {};
+
+  return asButton ? (
+    <MotionButton
+      type={type}
+      className={buttonClass}
+      disabled={disabled}
+      onClick={onClick}
+      {...motionProps}
+      {...props}
     >
-      {asButton ? (
-        <button
-          type={type}
-          className={buttonClass}
-          disabled={disabled}
-          onClick={onClick}
-          {...props}
-        >
-          {icon && <span className="flex-shrink-0">{icon}</span>}
-          <h6>{children}</h6>
-        </button>
-      ) : (
-        <Link
-          href={href || '#'}
-          className={buttonClass}
-          {...props}
-        >
-          {icon && <span className="flex-shrink-0">{icon}</span>}
-          <h6>{children}</h6>
-        </Link>
-      )}
-    </motion.div>
+      {icon && <span className="flex-shrink-0">{icon}</span>}
+      <h6>{children}</h6>
+    </MotionButton>
+  ) : (
+    <MotionLink
+      href={href || '#'}
+      className={buttonClass}
+      {...motionProps}
+      {...props}
+    >
+      {icon && <span className="flex-shrink-0">{icon}</span>}
+      <h6>{children}</h6>
+    </MotionLink>
   );
 };
 

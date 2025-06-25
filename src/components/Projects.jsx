@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Database, LineChart, Code, Zap } from 'lucide-react';
-import ProjectCard from '@/components/ProjectCard';
-import SectionHeader from '@/components/SectionHeader';
+import ProjectCard from '../components/ProjectCard';
+import SectionHeader from '../components/SectionHeader';
 
 const Projects = ({ language = 'en' }) => { // Default to 'en' if no language prop is passed
   

@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import LanguageSelector from '@/components/LanguageSelector';
+import LanguageSelector from '../components/LanguageSelector';
 import Image from 'next/image';
 
 const Header = ({ language, onLanguageChange }) => {
@@ -114,10 +114,10 @@ const Header = ({ language, onLanguageChange }) => {
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className={`fixed top-0 left-0 w-full z-50 ${
-          !isTop ? "shadow-lg border-b border-gray-200 dark:border-gray-800" : ""
+          !isTop ? "shadow-lg border-b border-gray-800" : ""
         }`}
       >
-        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
+        <div className="bg-gray-900/80 backdrop-blur-md">
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <div
@@ -127,7 +127,7 @@ const Header = ({ language, onLanguageChange }) => {
                 <div className="mr-3">
                   <Image src="/lks-logo.svg" alt="Logo" width={40} height={40} />
                 </div>
-                <h4 className="text-xl font-bold text-gray-800 dark:text-white">
+                <h4 className="text-xl font-bold text-white">
                   LKS DATA
                 </h4>
               </div>
@@ -137,7 +137,7 @@ const Header = ({ language, onLanguageChange }) => {
                   {navItems.map((item) => (
                     <button
                       key={item.name}
-                      className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-yellow-400 transition-colors font-medium cursor-pointer"
+                      className="text-gray-300 hover:text-yellow-400 transition-colors font-medium cursor-pointer"
                       onClick={() => scrollToSection(item.href)}
                     >
                       {item.name}
@@ -151,7 +151,7 @@ const Header = ({ language, onLanguageChange }) => {
               </div>
 
               <button
-                className="md:hidden text-gray-700 dark:text-gray-300 z-50"
+                className="md:hidden text-gray-300 z-50"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
               >
@@ -174,7 +174,7 @@ const Header = ({ language, onLanguageChange }) => {
                     {navItems.map((item) => (
                       <motion.button
                         key={item.name}
-                        className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-yellow-400 transition-colors text-lg text-left"
+                        className="text-gray-300 hover:text-yellow-400 transition-colors text-lg text-left"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection(item.href)}

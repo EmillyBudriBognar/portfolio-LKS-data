@@ -7,7 +7,7 @@ import ActionButton from './ActionButton';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const AboutMe = ({ language = "pt" }) => {
+const About = ({ language = "pt" }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -135,7 +135,7 @@ const AboutMe = ({ language = "pt" }) => {
         title: "Tecnologias"
       },
       downloadButton: "Ver Currículo",
-      cvLink: "https://www.seusite.com/curriculo-pt" // Link para versão em português
+      cvLink: "https://docs.google.com/document/d/1zE1D6_t4CZW1GT0rpOoqhhIH71V_F7VT/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true" // Link para versão em português
     },
     en: {
       sectionHeader: {
@@ -171,7 +171,7 @@ const AboutMe = ({ language = "pt" }) => {
         title: "Technologies"
       },
       downloadButton: "View Resume",
-      cvLink: "https://www.yoursite.com/resume-en" // Link para versão em inglês
+      cvLink: "https://docs.google.com/document/d/1IYjTLMq5qCkwQ-NIw1_nZNCizCBUAsBR/edit?usp=sharing&ouid=107642192742902543413&rtpof=true&sd=true" // Link para versão em inglês
     },
   };
 
@@ -323,4 +323,4 @@ const AboutMe = ({ language = "pt" }) => {
   );
 };
 
-export default AboutMe;
+export default About;
