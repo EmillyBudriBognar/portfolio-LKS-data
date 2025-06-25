@@ -1,45 +1,105 @@
+// app/projects/page.js
 'use client';
 
+import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Database, LineChart, Code, Zap } from 'lucide-react';
+import ProjectCard from '@/components/ProjectCard';
+import SectionHeader from '@/components/SectionHeader';
 
-const Projects = () => {
+const Projects = ({ language = 'en' }) => { // Default to 'en' if no language prop is passed
+  
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const projects = [
-    {
-      id: 1,
-      title: "Data Manipulation System",
-      description: "Advanced system for cleaning, transforming and preparing large datasets for analysis.",
-      icon: <Database size={32} className="text-purple-600 dark:text-yellow-400" />,
-      tags: ["Python", "Pandas", "ETL"],
+  // Project data in both languages
+  const projectData = {
+    en: {
+      sectionHeader: {
+        title: "Featured Projects",
+        subtitle: "Selected projects showcasing my expertise in data manipulation, automated reporting and data analysis."
+      },
+      projects: [
+        {
+          id: 1,
+          title: "PROJECT 1",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          icon: <Database size={32} className="text-yellow-400" />,
+          tags: ["Python", "Pandas", "ETL"],
+          href: "/projects/project1",
+        },
+        {
+          id: 2,
+          title: "PROJECT 2",
+          description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          icon: <LineChart size={32} className="text-yellow-400" />,
+          tags: ["Power BI", "SQL", "Automation"],
+          href: "/projects/project1",
+        },
+        {
+          id: 3,
+          title: "PROJECT 3",
+          description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          icon: <Zap size={32} className="text-yellow-400" />,
+          tags: ["Python", "Automation", "Optimization"],
+          href: "/projects/project1",
+        },
+        {
+          id: 4,
+          title: "PROJECT 4",
+          description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          icon: <Code size={32} className="text-yellow-400" />,
+          tags: ["Airflow", "AWS", "Data Engineering"],
+          href: "/projects/project1",
+        },
+      ]
     },
-    {
-      id: 2,
-      title: "Automated Reporting",
-      description: "Automated report generation with dynamic visualizations updated in real-time.",
-      icon: <LineChart size={32} className="text-purple-600 dark:text-yellow-400" />,
-      tags: ["Power BI", "SQL", "Automation"],
-    },
-    {
-      id: 3,
-      title: "Routine Analysis",
-      description: "Optimization of routine data analysis processes with 80% reduction in processing time.",
-      icon: <Zap size={32} className="text-purple-600 dark:text-yellow-400" />,
-      tags: ["Python", "Automation", "Optimization"],
-    },
-    {
-      id: 4,
-      title: "Data Pipeline",
-      description: "Robust data pipeline architecture for enterprise-level data processing.",
-      icon: <Code size={32} className="text-purple-600 dark:text-yellow-400" />,
-      tags: ["Airflow", "AWS", "Data Engineering"],
-    },
-  ];
+    pt: {
+      sectionHeader: {
+        title: "Projetos Destacados",
+        subtitle: "Projetos selecionados que mostram minha experiência em manipulação de dados, relatórios automatizados e análise de dados."
+      },
+      projects: [
+        {
+          id: 1,
+          title: "PROJETO 1",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          icon: <Database size={32} className="text-yellow-400" />,
+          tags: ["Python", "Pandas", "ETL"],
+          href: "/projects/project1",
+        },
+        {
+          id: 2,
+          title: "PROJETO 2",
+          description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          icon: <LineChart size={32} className="text-yellow-400" />,
+          tags: ["Power BI", "SQL", "Automação"],
+          href: "/projects/project1",
+        },
+        {
+          id: 3,
+          title: "PROJETO 3",
+          description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          icon: <Zap size={32} className="text-yellow-400" />,
+          tags: ["Python", "Automação", "Otimização"],
+          href: "/projects/project1",
+        },
+        {
+          id: 4,
+          title: "PROJETO 4",
+          description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          icon: <Code size={32} className="text-yellow-400" />,
+          tags: ["Airflow", "AWS", "Engenharia de Dados"],
+          href: "/projects/project1",
+        },
+      ]
+    }
+  };
+
+  const currentData = projectData[language];
 
   const container = {
     hidden: { opacity: 0 },
@@ -63,21 +123,13 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={ref} className="py-20 bg-white dark:bg-gray-900">
+    <section id="projects" ref={ref} className="py-20 bg-gray-900">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Selected projects showcasing my expertise in data manipulation, automated reporting and data analysis.
-          </p>
-        </motion.div>
+        <SectionHeader
+          title={currentData.sectionHeader.title}
+          subtitle={currentData.sectionHeader.subtitle}
+          inView={inView}
+        />
 
         <motion.div
           variants={container}
@@ -85,30 +137,9 @@ const Projects = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={item}
-              whileHover={{ y: -10 }}
-              className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all"
-            >
-              <div className="mb-4">{project.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {project.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 bg-purple-100 dark:bg-gray-700 text-purple-800 dark:text-yellow-400 text-xs rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          {currentData.projects.map((project) => (
+            <motion.div key={project.id} variants={item}>
+              <ProjectCard {...project} />
             </motion.div>
           ))}
         </motion.div>
