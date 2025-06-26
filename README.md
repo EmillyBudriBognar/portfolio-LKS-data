@@ -1,4 +1,4 @@
-# ✨ Desenvolvimento Frontend & UX/UI por Budri
+# ✨ PROJETO FREELANCE - Portfolio LKS Data
 
 ---
 
