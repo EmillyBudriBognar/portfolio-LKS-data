@@ -20,7 +20,6 @@ const Header = ({ language, onLanguageChange }) => {
       navItems: [
         { name: 'Home', href: '#hero-section' },
         { name: 'Projects', href: '#projects-section' },
-        { name: 'Blog', href: '#blog-section' },
         { name: 'About', href: '#about-section' },
         { name: 'Contact', href: '#contact-section' },
       ],
@@ -29,7 +28,6 @@ const Header = ({ language, onLanguageChange }) => {
       navItems: [
         { name: 'Início', href: '#hero-section' },
         { name: 'Projetos', href: '#projects-section' },
-        { name: 'Blog', href: '#blog-section' },
         { name: 'Sobre', href: '#about-section' },
         { name: 'Contato', href: '#contact-section' },
       ],
@@ -132,7 +130,7 @@ const Header = ({ language, onLanguageChange }) => {
                 onClick={() => scrollToSection('#hero-section')} // Rola para o topo ao clicar no logo.
               >
                 <div className="mr-3">
-                  <Image src="/lks-logo.svg" alt="Logo" width={40} height={40} />
+                  <Image src="images/lks-logo.svg" alt="Logo" width={40} height={40} />
                 </div>
                 <h4 className="text-xl font-bold text-white">
                   LKS DATA

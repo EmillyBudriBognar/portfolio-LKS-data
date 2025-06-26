@@ -13,6 +13,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   const translations = {
     en: {
       tooltip: 'Language',
+      labelBelowIcon: 'Language', // Added for text below icon
       languageOptions: [
         { code: 'en', label: 'English' },
         { code: 'pt', label: 'Portuguese' },
@@ -20,6 +21,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
     },
     pt: {
       tooltip: 'Idioma',
+      labelBelowIcon: 'Idioma', // Added for text below icon
       languageOptions: [
         { code: 'en', label: 'Inglês' },
         { code: 'pt', label: 'Português' },
@@ -50,15 +52,19 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative flex flex-col items-center" ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className="p-2 rounded-full text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer"
+        className="p-2 rounded-full text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer flex flex-col items-center justify-center"
         aria-label={currentTranslations.tooltip}
       >
         <Globe size={20} className="relative z-10" />
+        {/* New div for the text below the icon */}
+        <div className="text-xs mt-1 text-gray-300 group-hover:text-yellow-400 transition-colors">
+          {currentTranslations.labelBelowIcon}
+        </div>
       </button>
 
       <AnimatePresence>

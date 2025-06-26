@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
-import BlogSection from '../components/BlogSection';
 import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -43,10 +42,6 @@ export default function Home() {
 
         <section id="projects-section" aria-label="Projects section" className="w-full">
           <Projects language={language} />
-        </section>
-
-        <section id="blog-section" aria-label="Blog section" className="w-full">
-          <BlogSection language={language} />
         </section>
 
         <section id="about-section" aria-label="About section" className="w-full">

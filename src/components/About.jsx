@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useAnimation } from 'framer-motion';
-import { Download, GraduationCap, Briefcase, Code, Database, Server, Cloud, LineChart, BarChart, Cpu, Cog } from 'lucide-react';
+import { Download, GraduationCap, Briefcase, Code, Database, Server, Cloud, LineChart, BarChart, Cpu, Cog, BookOpen } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
 import ActionButton from './ActionButton';
 import { useEffect } from 'react';
@@ -9,20 +9,17 @@ import { useInView } from 'react-intersection-observer';
 
 const About = ({ language = "pt" }) => {
   const controls = useAnimation();
-  // Usa useInView para disparar animações quando a seção entra na tela, apenas uma vez.
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
-  // Inicia a animação controlada quando a seção se torna visível.
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
 
-  // Variantes para a animação do container principal, com escalonamento de filhos.
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,7 +31,6 @@ const About = ({ language = "pt" }) => {
     }
   };
 
-  // Variantes genéricas para itens, com um efeito de mola suave.
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -49,7 +45,6 @@ const About = ({ language = "pt" }) => {
     }
   };
 
-  // Variantes para os cards (Educação, Experiência, Tecnologias), incluindo um efeito de elevação no hover.
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -72,7 +67,6 @@ const About = ({ language = "pt" }) => {
     }
   };
 
-  // Variantes para os ícones de tecnologia, com feedback visual no hover.
   const techVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -93,7 +87,6 @@ const About = ({ language = "pt" }) => {
     }
   };
 
-  // Lista de tecnologias com ícones e cores para renderização dinâmica.
   const technologies = [
     { icon: <Server className="text-amber-400" size={20} />, name: "Python", color: "bg-amber-500/10" },
     { icon: <Cpu className="text-blue-400" size={20} />, name: "Java", color: "bg-blue-500/10" },
@@ -106,7 +99,6 @@ const About = ({ language = "pt" }) => {
     { icon: <LineChart className="text-amber-400" size={20} />, name: "Google Analytics", color: "bg-amber-500/10" }
   ];
 
-  // Conteúdo textual da seção, separado por idioma para fácil internacionalização.
   const translations = {
     pt: {
       sectionHeader: {
@@ -117,14 +109,43 @@ const About = ({ language = "pt" }) => {
         title: "Formação",
         items: [
           {
-            title: "Ciência de Dados",
-            institution: "Universidade XYZ • 2020-2024",
-            description: "Especialização em machine learning e big data analytics com projetos aplicados em cenários empresariais reais."
+            title: "Ensino Médio Completo",
+            institution: "SESI Diadema • 2020-2023",
+            description: "Formação básica com foco em preparação para o mercado de trabalho."
           },
           {
-            title: "Pós-graduação em IA",
-            institution: "Instituto ABC • 2024",
-            description: "Foco em deep learning, processamento de linguagem natural e visão computacional para soluções inovadoras."
+            title: "Desenvolvimento de Software Multiplataforma",
+            institution: "FATEC Diadema Luigi Papaiz • 2024-2026",
+            description: "Graduação tecnológica com foco em desenvolvimento de software para diversas plataformas."
+          }
+        ]
+      },
+      courses: {
+        title: "Cursos",
+        items: [
+          {
+            title: "Modelagem de Dados",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Power BI do Básico ao Avançado",
+            institution: "Hashtag Treinamentos"
+          },
+          {
+            title: "Python para Iniciantes",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Banco de Dados do Básico ao Avançado",
+            institution: "Udemy"
+          },
+          {
+            title: "Excel Intermediário",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Inglês Intermediário",
+            institution: "Leitura técnica e escrita"
           }
         ]
       },
@@ -132,9 +153,9 @@ const About = ({ language = "pt" }) => {
         title: "Experiência",
         items: [
           {
-            title: "Engenheiro de Dados Sênior",
-            company: "DataTech Solutions • 2022-Presente",
-            description: "Liderança de projetos de ETL em larga escala, arquitetura de data lakes e implementação de pipelines de dados em tempo real."
+            title: "Atendente Geral",
+            company: "LAN House do Marcelo • 2022",
+            description: "Atendimento ao cliente, suporte técnico básico, gerenciamento de sistemas e utilização de ferramentas do pacote Office (Word, Excel)."
           }
         ]
       },
@@ -153,14 +174,43 @@ const About = ({ language = "pt" }) => {
         title: "Education",
         items: [
           {
-            title: "Data Science",
-            institution: "XYZ University • 2020-2024",
-            description: "Specialization in machine learning and big data analytics with applied projects in real business scenarios."
+            title: "High School Diploma",
+            institution: "SESI Diadema • 2020-2023",
+            description: "Basic education with focus on workplace preparation."
           },
           {
-            title: "Postgraduate in AI",
-            institution: "ABC Institute • 2024",
-            description: "Focus on deep learning, natural language processing and computer vision for innovative solutions."
+            title: "Multiplatform Software Development",
+            institution: "FATEC Diadema Luigi Papaiz • 2024-2026",
+            description: "Technological degree focused on software development for multiple platforms."
+          }
+        ]
+      },
+      courses: {
+        title: "Courses",
+        items: [
+          {
+            title: "Data Modeling",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Power BI from Basic to Advanced",
+            institution: "Hashtag Treinamentos"
+          },
+          {
+            title: "Python for Beginners",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Database from Basic to Advanced",
+            institution: "Udemy"
+          },
+          {
+            title: "Intermediate Excel",
+            institution: "Fundação Bradesco"
+          },
+          {
+            title: "Intermediate English",
+            institution: "Technical reading and writing"
           }
         ]
       },
@@ -168,9 +218,9 @@ const About = ({ language = "pt" }) => {
         title: "Experience",
         items: [
           {
-            title: "Senior Data Engineer",
-            company: "DataTech Solutions • 2022-Present",
-            description: "Leadership of large-scale ETL projects, data lake architecture and implementation of real-time data pipelines."
+            title: "General Attendant",
+            company: "LAN House do Marcelo • 2021-2022",
+            description: "Customer service, basic technical support, system management and use of Office package tools (Word, Excel)."
           }
         ]
       },
@@ -186,6 +236,7 @@ const About = ({ language = "pt" }) => {
   const {
     sectionHeader,
     education,
+    courses,
     experience,
     technologies: techTexts,
     downloadButton,
@@ -194,7 +245,6 @@ const About = ({ language = "pt" }) => {
 
   return (
     <section id="about" className="relative py-20 overflow-hidden bg-gray-900">
-      {/* Elementos de fundo para um efeito visual sutil de ruído e gradiente. */}
       <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -224,29 +274,54 @@ const About = ({ language = "pt" }) => {
           />
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <motion.div
-              variants={cardVariants}
-              whileHover="hover"
-              className="lg:w-1/2 bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-amber-500/20 transition-all duration-300 hover:border-amber-500/30"
-            >
-              <div className="flex items-center mb-6">
-                <div className="p-2 rounded-lg bg-amber-500/10">
-                  <GraduationCap className="text-amber-400" size={24} />
-                </div>
-                <h3 className="text-xl font-semibold text-white ml-3">{education.title}</h3>
-              </div>
-
-              <div className="space-y-5">
-                {education.items.map((item, index) => (
-                  <div key={index} className="relative pl-7 border-l-2 border-amber-500/30 group">
-                    <div className="absolute -left-[8px] top-0 w-3.5 h-3.5 bg-amber-500 rounded-full transition-all duration-300 group-hover:scale-125"></div>
-                    <h4 className="text-base font-medium text-white group-hover:text-amber-400 transition-colors">{item.title}</h4>
-                    <p className="text-blue-400 text-sm mb-1">{item.institution}</p>
-                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">{item.description}</p>
+            <div className="lg:w-1/2 space-y-6">
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-amber-500/20 transition-all duration-300 hover:border-amber-500/30"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="p-2 rounded-lg bg-amber-500/10">
+                    <GraduationCap className="text-amber-400" size={24} />
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                  <h3 className="text-xl font-semibold text-white ml-3">{education.title}</h3>
+                </div>
+
+                <div className="space-y-5">
+                  {education.items.map((item, index) => (
+                    <div key={index} className="relative pl-7 border-l-2 border-amber-500/30 group">
+                      <div className="absolute -left-[8px] top-0 w-3.5 h-3.5 bg-amber-500 rounded-full transition-all duration-300 group-hover:scale-125"></div>
+                      <h4 className="text-base font-medium text-white group-hover:text-amber-400 transition-colors">{item.title}</h4>
+                      <p className="text-blue-400 text-sm mb-1">{item.institution}</p>
+                      <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover:border-purple-500/30"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="p-2 rounded-lg bg-purple-500/10">
+                    <BookOpen className="text-purple-400" size={24} />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white ml-3">{courses.title}</h3>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {courses.items.map((course, index) => (
+                    <div key={index} className="relative pl-6 group">
+                      <div className="absolute left-0 top-1.5 w-2 h-2 bg-purple-500 rounded-full transition-all duration-300 group-hover:scale-150"></div>
+                      <h4 className="text-sm font-medium text-white group-hover:text-purple-400 transition-colors">{course.title}</h4>
+                      <p className="text-gray-400 text-xs group-hover:text-gray-300 transition-colors">{course.institution}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
 
             <motion.div
               variants={itemVariants}
@@ -277,7 +352,7 @@ const About = ({ language = "pt" }) => {
               <motion.div
                 variants={cardVariants}
                 whileHover="hover"
-                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:border-teal-500/30"
+                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 pb-12 shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:border-teal-500/30"
               >
                 <div className="flex items-center mb-6">
                   <div className="p-2 rounded-lg bg-teal-500/10">

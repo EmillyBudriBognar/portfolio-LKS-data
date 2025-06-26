@@ -1,7 +1,5 @@
-// app/projects/page.js
 'use client';
 
-import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Database, LineChart, Code, Zap } from 'lucide-react';
@@ -9,13 +7,11 @@ import ProjectCard from '../components/ProjectCard';
 import SectionHeader from '../components/SectionHeader';
 
 const Projects = ({ language = 'en' }) => {
-  // Hook para detectar se o componente está visível na tela, acionando a animação uma vez.
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1, // Começa a animar quando 10% do componente está visível
+    threshold: 0.1,
   });
 
-  // Dados dos projetos em diferentes idiomas para internacionalização.
   const projectData = {
     en: {
       sectionHeader: {
@@ -25,35 +21,35 @@ const Projects = ({ language = 'en' }) => {
       projects: [
         {
           id: 1,
-          title: "PROJECT 1",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          title: "Student Registration System",
+          description: "RESTful API with Java 17 and Spring Boot for student management with MySQL database.",
           icon: <Database size={32} className="text-yellow-400" />,
-          tags: ["Python", "Pandas", "ETL"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "REST API"],
+          href: "/projects/cadastro-alunos",
         },
         {
           id: 2,
-          title: "PROJECT 2",
-          description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          title: "Power BI Dashboards",
+          description: "Interactive visualizations with Power BI based on CSV and Excel data, focused on strategic areas (Sales, HR and Logistics).",
           icon: <LineChart size={32} className="text-yellow-400" />,
-          tags: ["Power BI", "SQL", "Automation"],
-          href: "/projects/project1",
+          tags: ["Power BI", "Excel/CSV", "Data Visualization", "Dashboards", "Business Intelligence"],
+          href: "/projects/dashboards-bi",
         },
         {
           id: 3,
-          title: "PROJECT 3",
-          description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          title: "Sentiment Analysis API",
+          description: "Text processing API that identifies sentiments in sentences, with Swagger documentation and automated tests.",
           icon: <Zap size={32} className="text-yellow-400" />,
-          tags: ["Python", "Automation", "Optimization"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot 3", "NLP", "Swagger", "JUnit", "Docker"],
+          href: "/projects/analise-sentimentos",
         },
         {
           id: 4,
-          title: "PROJECT 4",
-          description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          title: "Sales Analysis API",
+          description: "API that receives sales data (CSV/JSON), stores it in a database and generates analyses such as total by region, monthly average and product ranking. Ideal for transforming raw data into insights.",
           icon: <Code size={32} className="text-yellow-400" />,
-          tags: ["Airflow", "AWS", "Data Engineering"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot", "PostgreSQL", "JPA", "RESTful API", "Lombok", "MVC", "Data Analysis"],
+          href: "/projects/analise-vendas",
         },
       ]
     },
@@ -65,35 +61,35 @@ const Projects = ({ language = 'en' }) => {
       projects: [
         {
           id: 1,
-          title: "PROJETO 1",
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          title: "Sistema de Cadastro de Alunos",
+          description: "API RESTful com Java 17 e Spring Boot para gerenciar alunos com banco de dados MySQL.",
           icon: <Database size={32} className="text-yellow-400" />,
-          tags: ["Python", "Pandas", "ETL"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "REST API"],
+          href: "/projects/cadastro-alunos",
         },
         {
           id: 2,
-          title: "PROJETO 2",
-          description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          title: "Dashboards Power BI",
+          description: "Visualizações interativas com Power BI baseadas em dados CSV e Excel, focadas em áreas estratégicas (Vendas, RH e Logística).",
           icon: <LineChart size={32} className="text-yellow-400" />,
-          tags: ["Power BI", "SQL", "Automação"],
-          href: "/projects/project1",
+          tags: ["Power BI", "Excel/CSV", "Visualização de Dados", "Dashboards", "Business Intelligence"],
+          href: "/projects/dashboards-bi",
         },
         {
           id: 3,
-          title: "PROJETO 3",
-          description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          title: "Análise de Sentimentos API",
+          description: "API de processamento de texto que identifica sentimentos em frases, com documentação Swagger e testes automatizados.",
           icon: <Zap size={32} className="text-yellow-400" />,
-          tags: ["Python", "Automação", "Otimização"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot 3", "NLP", "Swagger", "JUnit", "Docker"],
+          href: "/projects/analise-sentimentos",
         },
         {
           id: 4,
-          title: "PROJETO 4",
-          description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          title: "API de Análise de Vendas",
+          description: "API que recebe dados de vendas (CSV/JSON), armazena em banco e gera análises como total por região, média mensal e ranking de produtos. Ideal para transformar dados brutos em insights.",
           icon: <Code size={32} className="text-yellow-400" />,
-          tags: ["Airflow", "AWS", "Engenharia de Dados"],
-          href: "/projects/project1",
+          tags: ["Java", "Spring Boot", "PostgreSQL", "JPA", "RESTful API", "Lombok", "MVC", "Análise de Dados"],
+          href: "/projects/analise-vendas",
         },
       ]
     }
@@ -101,18 +97,16 @@ const Projects = ({ language = 'en' }) => {
 
   const currentData = projectData[language];
 
-  // Variantes de animação para o contêiner dos projetos.
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Atraso na animação dos itens filhos
+        staggerChildren: 0.2,
       },
     },
   };
 
-  // Variantes de animação para cada item individual de projeto.
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -130,13 +124,12 @@ const Projects = ({ language = 'en' }) => {
         <SectionHeader
           title={currentData.sectionHeader.title}
           subtitle={currentData.sectionHeader.subtitle}
-          inView={inView} // Passa o estado de visibilidade para o SectionHeader
+          inView={inView}
         />
 
         <motion.div
           variants={container}
           initial="hidden"
-          // Anima os cards apenas quando a seção está visível
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >

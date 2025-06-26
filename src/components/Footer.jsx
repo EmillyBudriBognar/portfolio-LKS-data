@@ -7,7 +7,6 @@ import { Globe, Mail, Linkedin, Github } from 'lucide-react';
 import Image from "next/image";
 
 const Footer = ({ language = "en" }) => {
-  // Objeto de traduções para suportar múltiplos idiomas no rodapé.
   const translations = {
     pt: {
       aboutTitle: "SOBRE",
@@ -16,7 +15,6 @@ const Footer = ({ language = "en" }) => {
       pageLinks: [
         { name: "Início", link: "hero-section" },
         { name: "Projetos", link: "projects-section" },
-        { name: "Blog", link: "blog" },
         { name: "Sobre", link: "about-section" },
         { name: "Contato", link: "contact-section" },
       ],
@@ -27,6 +25,7 @@ const Footer = ({ language = "en" }) => {
         { name: "Disponível em EN/PT" },
       ],
       copyright: `© ${new Date().getFullYear()} LKS Data. Todos os direitos reservados.`,
+      portfolioByBudri: 'Portfolio feito por Budri',
     },
     en: {
       aboutTitle: "ABOUT",
@@ -35,7 +34,6 @@ const Footer = ({ language = "en" }) => {
       pageLinks: [
         { name: "Home", link: "hero-section" },
         { name: "Projects", link: "projects-section" },
-        { name: "Blog", link: "blog" },
         { name: "About", link: "about-section" },
         { name: "Contact", link: "contact-section" },
       ],
@@ -46,10 +44,10 @@ const Footer = ({ language = "en" }) => {
         { name: "Available in EN/PT" },
       ],
       copyright: `© ${new Date().getFullYear()} LKS Data. All rights reserved.`,
+      portfolioByBudri: 'Portfolio by Budri',
     },
   };
 
-  // Desestrutura os textos traduzidos com base no idioma selecionado.
   const {
     aboutTitle,
     aboutDescription,
@@ -58,9 +56,9 @@ const Footer = ({ language = "en" }) => {
     contactTitle,
     contactInfo,
     copyright,
+    portfolioByBudri,
   } = translations[language];
 
-  // Função para rolagem suave para as seções da página.
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -68,10 +66,9 @@ const Footer = ({ language = "en" }) => {
     }
   };
 
-  // Hook `useInView` para animar os elementos do rodapé quando entram na viewport.
   const { ref: footerRef, inView: footerInView } = useInView({
-    triggerOnce: true, // A animação ocorre apenas uma vez.
-    threshold: 0.1, // O elemento é considerado "em vista" quando 10% dele está visível.
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   return (
@@ -81,7 +78,6 @@ const Footer = ({ language = "en" }) => {
     >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Seção Sobre e Logo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -90,7 +86,7 @@ const Footer = ({ language = "en" }) => {
           >
             <div className="flex items-center">
               <Image
-                src="/lks-logo.svg"
+                src="images/lks-logo.svg"
                 alt="LKS Data Logo"
                 width={100}
                 height={100}
@@ -100,7 +96,6 @@ const Footer = ({ language = "en" }) => {
             <p className="mt-4 text-gray-400">
               {aboutDescription}
             </p>
-            {/* Ícones de redes sociais */}
             <div className="flex space-x-4 mt-6">
               <a href="https://github.com/luca490" className="text-gray-400 hover:text-white transition-colors">
                 <Github size={20} />
@@ -114,7 +109,6 @@ const Footer = ({ language = "en" }) => {
             </div>
           </motion.div>
 
-          {/* Links de Navegação */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -139,7 +133,6 @@ const Footer = ({ language = "en" }) => {
             </ul>
           </motion.div>
 
-          {/* Informações de Contato */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -162,7 +155,6 @@ const Footer = ({ language = "en" }) => {
           </motion.div>
         </div>
 
-        {/* Copyright e Crédito */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={footerInView ? { opacity: 1, y: 0 } : {}}
@@ -173,15 +165,14 @@ const Footer = ({ language = "en" }) => {
             {copyright}
           </p>
 
-          {/* Crédito "Made by" discreto */}
           <div className="mt-4 md:mt-0">
             <a
               href="https://budri.com.br"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-400 text-s transition-colors"
+              className="text-gray-600 hover:text-gray-400 text-xs transition-colors"
             >
-              By Budri
+              {portfolioByBudri}
             </a>
           </div>
         </motion.div>
