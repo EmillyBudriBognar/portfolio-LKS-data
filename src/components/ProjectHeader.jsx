@@ -78,7 +78,7 @@ const ProjectHeader = ({ language, onLanguageChange }) => {
         >
           <div className="flex items-center">
             <Image
-              src="images/lks-logo.svg"
+              src="/images/lks-logo.svg"
               alt="Logo"
               width={32}
               height={32}

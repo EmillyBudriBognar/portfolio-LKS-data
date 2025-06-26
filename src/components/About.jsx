@@ -154,7 +154,7 @@ const About = ({ language = "pt" }) => {
         items: [
           {
             title: "Atendente Geral",
-            company: "LAN House do Marcelo • 2022",
+            company: "LAN House do Marcelo • 2022-Agora",
             description: "Atendimento ao cliente, suporte técnico básico, gerenciamento de sistemas e utilização de ferramentas do pacote Office (Word, Excel)."
           }
         ]
@@ -219,7 +219,7 @@ const About = ({ language = "pt" }) => {
         items: [
           {
             title: "General Attendant",
-            company: "LAN House do Marcelo • 2021-2022",
+            company: "LAN House do Marcelo • 2022-Now",
             description: "Customer service, basic technical support, system management and use of Office package tools (Word, Excel)."
           }
         ]
@@ -352,7 +352,7 @@ const About = ({ language = "pt" }) => {
               <motion.div
                 variants={cardVariants}
                 whileHover="hover"
-                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 pb-12 shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:border-teal-500/30"
+                className="bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-xl p-6 md:pb-12 shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:border-teal-500/30"
               >
                 <div className="flex items-center mb-6">
                   <div className="p-2 rounded-lg bg-teal-500/10">

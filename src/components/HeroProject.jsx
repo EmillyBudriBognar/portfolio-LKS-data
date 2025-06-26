@@ -6,7 +6,7 @@ import { Cpu } from 'lucide-react';
 
 const HeroSection = ({ project, language, systemTag }) => {
   return (
-    <section className="h-[110vh] mt-14 min-h-[600px] px-4 sm:px-6 lg:px-8 relative overflow-hidden flex items-center py-10">
+    <section className="min-h-screen mt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex items-center py-10">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900 to-indigo-950"></div>
 
       <div className="absolute inset-0 opacity-10">

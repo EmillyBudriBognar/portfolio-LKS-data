@@ -12,26 +12,21 @@ const CallToAction = ({ repositoryUrl, language }) => {
       description: 'Acesse o repositório para uma análise detalhada da arquitetura e implementação.',
       viewRepository: 'Ver Repositório',
       githubTag: 'GitHub',
-      ctaSubtext: 'Open Source • MIT License • Contribuições Bem-vindas'
+      ctaSubtext: 'Open Source • Licença MIT • Contribuições Bem-vindas',
     },
     en: {
       heading: 'Ready to Dive Into the Code?',
       description: 'Explore the repository for comprehensive architectural insights and implementation details.',
       viewRepository: 'View Repository',
       githubTag: 'GitHub',
-      ctaSubtext: 'Open Source • MIT License • Contributions Welcome'
+      ctaSubtext: 'Open Source • MIT License • Contributions Welcome',
     },
   };
 
   const currentTranslations = translations[language];
 
-  const baseButtonClasses = "relative overflow-hidden px-8 py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-bold shadow-2xl transition-all duration-500 ease-in-out transform group";
-  const hoverEffect = { 
-    y: -5, 
-    scale: 1.05, 
-    boxShadow: "0 15px 30px rgba(245, 158, 11, 0.4)",
-    backgroundColor: "rgba(17, 24, 39, 0.9)"
-  };
+  const baseButtonClasses =
+    'relative px-8 py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-bold transition-all duration-300';
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
@@ -47,7 +42,7 @@ const CallToAction = ({ repositoryUrl, language }) => {
             transition={{
               duration: 20 + Math.random() * 20,
               repeat: Infinity,
-              ease: "linear",
+              ease: 'linear',
             }}
             className="absolute text-yellow-400/20"
             style={{
@@ -59,7 +54,7 @@ const CallToAction = ({ repositoryUrl, language }) => {
           </motion.div>
         ))}
       </div>
- 
+
       <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
       <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10"></div>
 
@@ -96,23 +91,29 @@ const CallToAction = ({ repositoryUrl, language }) => {
                 </p>
 
                 <div className="flex flex-col items-center gap-8">
-                  <Link href={repositoryUrl} passHref legacyBehavior>
-                    <motion.a
-                      whileHover={hoverEffect}
-                      whileTap={{ scale: 0.97 }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${baseButtonClasses} bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-gray-700 text-gray-100 hover:border-yellow-400/70 hover:text-white`}
+                  <Link
+                    href={repositoryUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${baseButtonClasses} 
+                                  bg-gradient-to-br from-amber-600 to-amber-800 
+                                  border-2 border-amber-500 text-white
+                                  hover:from-amber-700 hover:to-amber-900
+                                  hover:border-yellow-400 shadow-lg`}
+                  >
+                    <motion.div 
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="flex items-center gap-3"
                     >
-                      <span className="absolute inset-0 rounded-xl p-px bg-gradient-to-br from-yellow-400/60 via-transparent to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                      <GitBranch className="w-6 h-6 text-yellow-400 group-hover:scale-110 transition-transform" />
-                      <span className="relative">{currentTranslations.viewRepository}</span>
-                      <span className="ml-3 px-3 py-1 text-sm rounded-full bg-gray-800/80 text-yellow-400 font-bold tracking-wide border border-yellow-400/20 group-hover:bg-yellow-400/10 group-hover:text-yellow-300 transition-colors">
+                      <GitBranch className="w-6 h-6" />
+                      <span>{currentTranslations.viewRepository}</span>
+                      <span className="ml-3 px-3 py-1 text-sm rounded-full bg-gray-800/80 text-yellow-400 font-bold tracking-wide border border-yellow-400/20">
                         {currentTranslations.githubTag}
                       </span>
-                    </motion.a>
+                    </motion.div>
                   </Link>
-                  
+
                   <p className="text-sm text-gray-500 font-mono flex items-center gap-2">
                     <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                     {currentTranslations.ctaSubtext}

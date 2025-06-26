@@ -1,4 +1,3 @@
-// components/LanguageSelector.js
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -13,7 +12,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   const translations = {
     en: {
       tooltip: 'Language',
-      labelBelowIcon: 'Language', // Added for text below icon
+      labelBelowIcon: 'Language',
       languageOptions: [
         { code: 'en', label: 'English' },
         { code: 'pt', label: 'Portuguese' },
@@ -21,7 +20,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
     },
     pt: {
       tooltip: 'Idioma',
-      labelBelowIcon: 'Idioma', // Added for text below icon
+      labelBelowIcon: 'Idioma',
       languageOptions: [
         { code: 'en', label: 'Inglês' },
         { code: 'pt', label: 'Português' },
@@ -38,18 +37,32 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
   };
 
   useEffect(() => {
-    // Fecha o dropdown se o clique for fora do componente
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
 
+    const handleScroll = () => {
+      // Only close if the dropdown is currently open
+      if (open) { 
+        setOpen(false);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    
+    // Add scroll listener only if the dropdown is open
+    if (open) {
+      document.addEventListener('scroll', handleScroll);
+    }
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      // Remove scroll listener
+      document.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [open]); // Keep `open` in the dependency array to re-run the effect when `open` changes
 
   return (
     <div className="relative flex flex-col items-center" ref={dropdownRef}>
@@ -61,7 +74,6 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
         aria-label={currentTranslations.tooltip}
       >
         <Globe size={20} className="relative z-10" />
-        {/* New div for the text below the icon */}
         <div className="text-xs mt-1 text-gray-300 group-hover:text-yellow-400 transition-colors">
           {currentTranslations.labelBelowIcon}
         </div>
@@ -88,7 +100,7 @@ const LanguageSelector = ({ onLanguageChange = () => {}, language = 'en' }) => {
             animate={{ opacity: 1, y: 5 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-32 bg-gray-900/90 backdrop-blur-md shadow-lg rounded-md overflow-hidden z-50 border border-gray-700"
+            className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-32 bg-gray-900/90 backdrop-blur-md shadow-lg rounded-md overflow-hidden z-50 border border-gray-700"
           >
             {languages.map((lang) => (
               <li

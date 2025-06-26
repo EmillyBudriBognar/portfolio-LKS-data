@@ -176,13 +176,13 @@ const Header = ({ language, onLanguageChange }) => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className="md:hidden mt-4 pb-4"
+                  className="md:hidden mt-4 pb-4 flex flex-col items-center justify-center text-center"
                 >
-                  <nav className="flex flex-col space-y-4">
+                  <nav className="flex flex-col space-y-4 w-full"> 
                     {navItems.map((item) => (
                       <motion.button
                         key={item.name}
-                        className="text-gray-300 hover:text-yellow-400 transition-colors text-lg text-left"
+                        className="text-gray-300 hover:text-yellow-400 transition-colors text-lg mx-auto"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection(item.href)}
@@ -192,7 +192,7 @@ const Header = ({ language, onLanguageChange }) => {
                     ))}
                   </nav>
                   {/* Seletor de Idioma para Mobile */}
-                  <div className="flex items-center justify-between mt-4">
+                  <div className="mt-4"> 
                     <LanguageSelector
                       language={language}
                       onLanguageChange={onLanguageChange}
