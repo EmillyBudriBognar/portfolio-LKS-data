@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, GitBranch } from 'lucide-react';
 import Link from 'next/link';
@@ -12,12 +12,12 @@ const CallToAction = ({ repositoryUrl, language }) => {
       description: 'Acesse o repositório para uma análise detalhada da arquitetura e implementação.',
       viewRepository: 'Ver Repositório',
       githubTag: 'GitHub',
-      ctaSubtext: 'Código Aberto • Licença MIT • Contribuições Bem-vindas', 
+      ctaSubtext: 'Código Aberto • Licença MIT • Contribuições Bem-vindas',
     },
     en: {
       heading: 'Ready to Dive Into the Code?',
-      description: 'Explore the repository for comprehensive architectural insights and implementation details.',
-      viewRepository: 'View Repository',
+      description: 'Explore o repositório para uma análise detalhada da arquitetura e implementação.',
+      viewRepository: 'Ver Repositório',
       githubTag: 'GitHub',
       ctaSubtext: 'Open Source • MIT License • Contributions Welcome',
     },
@@ -25,57 +25,81 @@ const CallToAction = ({ repositoryUrl, language }) => {
 
   const currentTranslations = translations[language];
 
+  const [randomDivStyles, setRandomDivStyles] = useState([]);
+
+  useEffect(() => {
+    const newStyles = [...Array(15)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      scale: 0.5 + Math.random() * 1.5,
+    }));
+    setRandomDivStyles(newStyles);
+  }, []);
+
   const ctaContainerVariants = {
     hidden: { opacity: 0, y: 80 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.4,
         ease: [0.2, 0.6, 0.4, 1],
         when: 'beforeChildren',
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
-  
+
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 relative overflow-hidden"> 
-     
-      <div className="absolute inset-0 overflow-hidden opacity-10"> 
-        {[...Array(15)].map((_, i) => ( 
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 relative overflow-hidden">
+
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        {randomDivStyles.map((style, i) => (
           <motion.div
             key={i}
             animate={{
-              x: [0, 150 * Math.sin(i * Math.PI / 10 + 0.5), 0], 
+              x: [0, 150 * Math.sin(i * Math.PI / 10 + 0.5), 0],
               y: [0, 150 * Math.cos(i * Math.PI / 10 + 0.5), 0],
               rotate: [0, 360],
-              opacity: [0.1, 0.3, 0.1] 
+              opacity: [0.1, 0.3, 0.1]
             }}
             transition={{
               duration: 25 + Math.random() * 25,
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="absolute text-yellow-400/20"
+            className="absolute text-yellow-400/400"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              scale: 0.5 + Math.random() * 1.5, 
+              left: style.left,
+              top: style.top,
+              scale: style.scale,
             }}
           >
-            <Code size={32} /> 
+            <Code size={32} />
           </motion.div>
+        ))}
+        {randomDivStyles.length === 0 && [...Array(15)].map((_, i) => (
+            <div
+                key={`fallback-${i}`}
+                className="absolute text-yellow-400/400"
+                style={{
+                    left: `${(i * 7) % 100}%`,
+                    top: `${(i * 10) % 100}%`,
+                    transform: 'scale(1)',
+                }}
+            >
+                <Code size={32} />
+            </div>
         ))}
       </div>
 
-      <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-500 rounded-full filter blur-3xl opacity-5 mix-blend-screen animate-pulse"></div> 
-      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-amber-500 rounded-full filter blur-3xl opacity-5 mix-blend-screen animate-pulse"></div> 
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-500/80 rounded-full filter blur-3xl opacity-20 mix-blend-screen animate-pulse"></div>
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-amber-500/50 rounded-full filter blur-3xl opacity-20 mix-blend-screen animate-pulse"></div>
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
@@ -87,14 +111,14 @@ const CallToAction = ({ repositoryUrl, language }) => {
         >
           <div className="relative bg-gray-900/90 border-2 border-gray-700 rounded-2xl overflow-hidden backdrop-blur-lg">
             <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-amber-400/30 via-transparent to-blue-500/30 pointer-events-none animate-shine"></div>
-            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-[size:60px_60px] opacity-5"></div> 
+            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-[size:60px_60px] opacity-5"></div>
 
             <div className="relative z-10 p-10 lg:p-12">
               <div className="text-center mx-auto">
                 <motion.div
                   initial={{ scale: 0.7, rotate: -10 }}
                   whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{ type: 'spring', stiffness: 150, damping: 10, delay: 0.2 }}
+                  transition={{ type: 'spring', stiffness: 150, damping: 10, delay: 0.1 }}
                   viewport={{ once: true }}
                   className="inline-flex items-center justify-center p-6 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-gray-700 mb-8 shadow-lg"
                 >

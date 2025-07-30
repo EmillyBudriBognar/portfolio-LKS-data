@@ -1,10 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu } from 'lucide-react';
 
 const HeroSection = ({ project, language, systemTag }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -50,34 +56,48 @@ const HeroSection = ({ project, language, systemTag }) => {
     },
   };
 
+  // Memoize the random values to ensure they are consistent between server and client
+  const memoizedRandomPositions = React.useMemo(() => {
+    if (typeof window === 'undefined') return []; // Don't generate on server
+    return [...Array(20)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+    }));
+  }, []);
+
   return (
     <section className="min-h-screen mt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex items-center py-10">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900 to-indigo-950"></div>
 
-      <div className="absolute inset-0 opacity-10">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0.5 }}
-            animate={{
-              x: [0, 100 * Math.sin(i * Math.PI / 10), 0],
-              y: [0, 100 * Math.cos(i * Math.PI / 10), 0],
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 15 + Math.random() * 15,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              ease: 'easeInOut',
-            }}
-            className="absolute w-1.5 h-1.5 bg-blue-300 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+      {isMounted && (
+        <div className="absolute inset-0 opacity-10">
+          {memoizedRandomPositions.map((position, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0.5 }}
+              animate={{
+                x: [0, 100 * Math.sin(i * Math.PI / 10), 0],
+                y: [0, 100 * Math.cos(i * Math.PI / 10), 0],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 15 + Math.random() * 15,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'easeInOut',
+              }}
+              className="absolute w-1.5 h-1.5 bg-blue-300 rounded-full"
+              style={{
+                left: position.left,
+                top: position.top,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-500/50 rounded-full filter blur-3xl opacity-20 mix-blend-screen animate-pulse"></div>
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-amber-500/50 rounded-full filter blur-3xl opacity-20 mix-blend-screen animate-pulse"></div>
 
       <div className="max-w-7xl mx-auto relative z-10 w-full flex flex-col justify-center h-full text-white">
         <motion.div
@@ -143,15 +163,15 @@ const HeroSection = ({ project, language, systemTag }) => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
           initial="hidden"
           whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
-          viewport={{ once: true, amount: 0.3 }}
         >
           {project.metrics.map((metric, index) => (
             <motion.div
               key={index}
               variants={metricItemVariants}
               whileHover={{ y: -5, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' }}
-              className="relative overflow-hidden rounded-xl bg-gray-900 bg-opacity-40 border border-gray-700 p-5 shadow-2xl backdrop-blur-sm cursor-pointer"
+              className="relative overflow-hidden rounded-xl bg-gray-900 bg-opacity-40 border border-gray-700 p-5 shadow-2xl backdrop-blur-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-transparent pointer-events-none"></div>
 
@@ -168,8 +188,8 @@ const HeroSection = ({ project, language, systemTag }) => {
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: '100%' }}
-                  transition={{ duration: 1.5, delay: 0.5 + index * 0.1 }}
-                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.3 + index * 0.1 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   className={`mt-3 h-1 ${metric.colorClass.replace('text-', 'bg-')}/60 rounded-full`}
                 />
               </div>
