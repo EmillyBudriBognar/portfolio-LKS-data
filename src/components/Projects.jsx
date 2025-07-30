@@ -21,18 +21,18 @@ const Projects = ({ language = 'en' }) => {
       projects: [
         {
           id: 1,
-          title: "Student Registration System",
-          description: "RESTful API with Java 17 and Spring Boot for student management with MySQL database.",
+          title: "Book Management with Spring Boot",
+          description: "Complete CRUD solution for book catalog with Swagger documentation and Docker deploy.",
           icon: <Database size={32} className="text-yellow-400" />,
-          tags: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "REST API"],
-          href: "/projects/cadastro-alunos",
+          tags: ["Java", "Spring Boot", "Spring Data JPA", "Docker", "REST API"],
+          href: "/projects/gestao-livros",
         },
         {
           id: 2,
           title: "Power BI Dashboards",
           description: "Interactive visualizations with Power BI based on CSV and Excel data, focused on strategic areas (Sales, HR and Logistics).",
           icon: <LineChart size={32} className="text-yellow-400" />,
-          tags: ["Power BI", "Excel/CSV", "Data Visualization", "Dashboards", "Business Intelligence"],
+          tags: ["Power BI", "Excel/CSV", "Data Visualization", "Dashboards", "Business Intelligence", "DAX", "SQL Server"],
           href: "/projects/dashboards-bi",
         },
         {
@@ -48,7 +48,7 @@ const Projects = ({ language = 'en' }) => {
           title: "Sales Analysis API",
           description: "API that receives sales data (CSV/JSON), stores it in a database and generates analyses such as total by region, monthly average and product ranking. Ideal for transforming raw data into insights.",
           icon: <Code size={32} className="text-yellow-400" />,
-          tags: ["Java", "Spring Boot", "PostgreSQL", "JPA", "RESTful API", "Lombok", "MVC", "Data Analysis"],
+          tags: ["Python", "Pandas", "SeaBorn", "Matplotlib", "Data Analysis", "Git", "Jupyter Notebook"],
           href: "/projects/analise-vendas",
         },
       ]
@@ -65,7 +65,7 @@ const Projects = ({ language = 'en' }) => {
           description: "Solução completa de CRUD para catálogo de livros com documentação Swagger e deploy Docker.",
           icon: <Database size={32} className="text-yellow-400" />,
           tags: ["Java", "Spring Boot", "Spring Data JPA", "Docker", "REST API"],
-          href: "/projects/cadastro-alunos",
+          href: "/projects/gestao-livros",
         },
         {
           id: 2,

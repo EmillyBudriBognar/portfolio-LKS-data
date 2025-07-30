@@ -12,7 +12,7 @@ const CallToAction = ({ repositoryUrl, language }) => {
       description: 'Acesse o repositório para uma análise detalhada da arquitetura e implementação.',
       viewRepository: 'Ver Repositório',
       githubTag: 'GitHub',
-      ctaSubtext: 'Open Source • Licença MIT • Contribuições Bem-vindas',
+      ctaSubtext: 'Código Aberto • Licença MIT • Contribuições Bem-vindas', 
     },
     en: {
       heading: 'Ready to Dive Into the Code?',
@@ -25,22 +25,40 @@ const CallToAction = ({ repositoryUrl, language }) => {
 
   const currentTranslations = translations[language];
 
-  const baseButtonClasses =
-    'relative px-8 py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-bold transition-all duration-300';
+  const ctaContainerVariants = {
+    hidden: { opacity: 0, y: 80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.2, 0.6, 0.4, 1],
+        when: 'beforeChildren',
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        {[...Array(10)].map((_, i) => (
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 relative overflow-hidden"> 
+     
+      <div className="absolute inset-0 overflow-hidden opacity-10"> 
+        {[...Array(15)].map((_, i) => ( 
           <motion.div
             key={i}
             animate={{
-              x: [0, 100, 0],
-              y: [0, 50, 0],
+              x: [0, 150 * Math.sin(i * Math.PI / 10 + 0.5), 0], 
+              y: [0, 150 * Math.cos(i * Math.PI / 10 + 0.5), 0],
               rotate: [0, 360],
+              opacity: [0.1, 0.3, 0.1] 
             }}
             transition={{
-              duration: 20 + Math.random() * 20,
+              duration: 25 + Math.random() * 25,
               repeat: Infinity,
               ease: 'linear',
             }}
@@ -48,27 +66,28 @@ const CallToAction = ({ repositoryUrl, language }) => {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              scale: 0.5 + Math.random() * 1.5, 
             }}
           >
-            <Code size={24 + Math.random() * 40} />
+            <Code size={32} /> 
           </motion.div>
         ))}
       </div>
 
-      <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
-      <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10"></div>
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-500 rounded-full filter blur-3xl opacity-5 mix-blend-screen animate-pulse"></div> 
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-amber-500 rounded-full filter blur-3xl opacity-5 mix-blend-screen animate-pulse"></div> 
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.2, 0.6, 0.4, 1] }}
+          variants={ctaContainerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           className="rounded-2xl overflow-hidden"
         >
-          <div className="relative bg-gray-900/90 border-2 border-gray-700/50 rounded-2xl overflow-hidden backdrop-blur-lg">
-            <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-amber-400/30 via-transparent to-blue-500/30 pointer-events-none animate-pulse"></div>
-            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-[size:60px_60px] opacity-10"></div>
+          <div className="relative bg-gray-900/90 border-2 border-gray-700 rounded-2xl overflow-hidden backdrop-blur-lg">
+            <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-amber-400/30 via-transparent to-blue-500/30 pointer-events-none animate-shine"></div>
+            <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-[size:60px_60px] opacity-5"></div> 
 
             <div className="relative z-10 p-10 lg:p-12">
               <div className="text-center mx-auto">
@@ -82,29 +101,35 @@ const CallToAction = ({ repositoryUrl, language }) => {
                   <Code className="w-10 h-10 text-amber-400" />
                 </motion.div>
 
-                <h3 className="text-3xl sm:text-4xl font-extrabold mb-6 bg-gradient-to-r from-amber-300 via-gray-100 to-blue-300 bg-clip-text text-transparent leading-tight tracking-tight">
+                <motion.h3
+                  variants={textVariants}
+                  className="text-3xl sm:text-4xl font-extrabold mb-6 bg-gradient-to-r from-amber-300 via-gray-100 to-blue-300 bg-clip-text text-transparent leading-tight tracking-tight"
+                >
                   {currentTranslations.heading}
-                </h3>
+                </motion.h3>
 
-                <p className="text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
+                <motion.p
+                  variants={textVariants}
+                  className="text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto"
+                >
                   {currentTranslations.description}
-                </p>
+                </motion.p>
 
                 <div className="flex flex-col items-center gap-8">
                   <Link
                     href={repositoryUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${baseButtonClasses} 
-                                  bg-gradient-to-br from-amber-600 to-amber-800 
-                                  border-2 border-amber-500 text-white
-                                  hover:from-amber-700 hover:to-amber-900
-                                  hover:border-yellow-400 shadow-lg`}
+                    className="relative px-8 py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-bold transition-all duration-300
+                      bg-gradient-to-br from-amber-500 to-amber-700
+                      border-2 border-amber-400 text-white
+                      hover:from-amber-600 hover:to-amber-800
+                      hover:border-yellow-300 shadow-xl overflow-hidden group"
                   >
-                    <motion.div 
+                    <motion.div
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-3 relative z-10"
                     >
                       <GitBranch className="w-6 h-6" />
                       <span>{currentTranslations.viewRepository}</span>
@@ -112,12 +137,16 @@ const CallToAction = ({ repositoryUrl, language }) => {
                         {currentTranslations.githubTag}
                       </span>
                     </motion.div>
+                    <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl"></span>
                   </Link>
 
-                  <p className="text-sm text-gray-500 font-mono flex items-center gap-2">
+                  <motion.p
+                    variants={textVariants}
+                    className="text-sm text-gray-500 font-mono flex items-center gap-2"
+                  >
                     <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                     {currentTranslations.ctaSubtext}
-                  </p>
+                  </motion.p>
                 </div>
               </div>
             </div>

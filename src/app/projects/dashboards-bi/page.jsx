@@ -1,4 +1,3 @@
-// ProjectDetailPage.jsx
 'use client';
 
 import React, { useState } from 'react';
@@ -25,16 +24,13 @@ import CallToAction from '@/components/CallToAction';
 import ProjectFooter from '@/components/ProjectFooter';
 
 const ProjectDetailPage = () => {
-  // Estado para controlar o idioma atual da página - 'pt' para Português, 'en' para Inglês.
   const [language, setLanguage] = useState('pt');
 
-  // Objeto para armazenar as traduções do "systemTag"
   const systemTagTranslations = {
     pt: 'SISTEMA DISTRIBUÍDO',
     en: 'DISTRIBUTED SYSTEM',
   };
 
-  // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
     title: {
       pt: 'Coleção de Dashboards Interativos no Power BI',
@@ -113,8 +109,8 @@ const ProjectDetailPage = () => {
           en: 'Actions and Solutions Implemented',
         },
         content: {
-          pt: 'Desenvolvi dashboards no Power BI conectados a bases em Excel, SQL Server e Azure, utilizando **Power Query** para transformação de dados e **DAX** para criação de métricas avançadas. Implantamos filtros dinâmicos, gráficos personalizados e segmentações por região, período e equipe. Automatizamos a atualização dos relatórios via **Gateway Pessoal** e organizamos os projetos em workspaces com permissões hierárquicas.',
-          en: 'I Have developed dashboards in Power BI connected to Excel, SQL Server, and Azure databases, using **Power Query** for data transformation and **DAX** for creating advanced metrics. We implemented dynamic filters, customized visuals, and segmentations by region, time, and team. Reports were automatically updated via **Personal Gateway** and structured in workspaces with hierarchical permissions.',
+          pt: 'Desenvolvi dashboards no Power BI conectados a bases em Excel, SQL Server e Azure, utilizando Power Query para transformação de dados e DAX para criação de métricas avançadas. Implantamos filtros dinâmicos, gráficos personalizados e segmentações por região, período e equipe. Automatizamos a atualização dos relatórios via Gateway Pessoal e organizamos os projetos em workspaces com permissões hierárquicas.',
+          en: 'I Have developed dashboards in Power BI connected to Excel, SQL Server, and Azure databases, using Power Query for data transformation and DAX for creating advanced metrics. We implemented dynamic filters, customized visuals, and segmentations by region, time, and team. Reports were automatically updated via Personal Gateway and structured in workspaces with hierarchical permissions.',
         },
         icon: <BarChart3 className="w-6 h-6 text-blue-500" />,
         imageUrl: '/images/powerbi3.png',
@@ -135,14 +131,12 @@ const ProjectDetailPage = () => {
     repositoryUrl: 'https://github.com/luca490/projetos-powerbi',
   };
 
-
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden">
       <ProjectHeader
         language={language}
         onLanguageChange={setLanguage}
       />
-      {/* Passando a prop 'systemTag' com base no idioma atual */}
       <HeroSection
         project={project}
         language={language}

@@ -1,4 +1,3 @@
-// ProjectDetailPage.jsx
 'use client';
 
 import React, { useState } from 'react';
@@ -21,16 +20,13 @@ import CallToAction from '@/components/CallToAction';
 import ProjectFooter from '@/components/ProjectFooter';
 
 const ProjectDetailPage = () => {
-  // Estado para controlar o idioma atual da página - 'pt' para Português, 'en' para Inglês.
   const [language, setLanguage] = useState('pt');
 
-  // Objeto para armazenar as traduções do "systemTag"
   const systemTagTranslations = {
     pt: 'GERAÇÃO DE GRÁFICOS',
     en: 'GRAPHIC GENERATION',
   };
 
-  // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
     title: {
       pt: 'Análise Exploratória de Dados de Vendas com Python',
@@ -144,15 +140,12 @@ const ProjectDetailPage = () => {
     repositoryUrl: 'https://github.com/luca490/analise_vendas',
   };
 
-
-
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden">
       <ProjectHeader
         language={language}
         onLanguageChange={setLanguage}
       />
-      {/* Passando a prop 'systemTag' com base no idioma atual */}
       <HeroSection
         project={project}
         language={language}

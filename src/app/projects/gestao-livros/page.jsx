@@ -1,4 +1,3 @@
-// ProjectDetailPage.jsx
 'use client';
 
 import React, { useState } from 'react';
@@ -20,16 +19,13 @@ import CallToAction from '@/components/CallToAction';
 import ProjectFooter from '@/components/ProjectFooter';
 
 const ProjectDetailPage = () => {
-  // Estado para controlar o idioma atual da página - 'pt' para Português, 'en' para Inglês.
   const [language, setLanguage] = useState('pt');
 
-  // Objeto para armazenar as traduções do "systemTag"
   const systemTagTranslations = {
     pt: 'SISTEMA DE CADASTRO',
     en: 'REGISTRATION SYSTEM',
   };
 
-  // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
     title: {
       pt: 'API RESTful para Gestão de Livros com Java e Spring Boot',
@@ -176,7 +172,6 @@ const ProjectDetailPage = () => {
         language={language}
         onLanguageChange={setLanguage}
       />
-      {/* Passando a prop 'systemTag' com base no idioma atual */}
       <HeroSection
         project={project}
         language={language}
