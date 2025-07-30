@@ -25,167 +25,123 @@ const ProjectDetailPage = () => {
 
   // Objeto para armazenar as traduções do "systemTag"
   const systemTagTranslations = {
-    pt: 'SISTEMA DISTRIBUÍDO',
-    en: 'DISTRIBUTED SYSTEM',
+    pt: 'ANÁLISE DE VARIÁVEIS',
+    en: 'VARIABLE ANALYSIS',
   };
 
   // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
-    // Título do projeto. Forneça o título em português e inglês.
-    title: {
-      pt: 'Plataforma de Microsserviços de Alta Performance',
-      en: 'High-Performance Microservices Platform',
-    },
-    // Slogan ou frase de efeito curta que resume o projeto. Exemplo: 'Inovando a forma como interagimos com [Tecnologia/Setor]'
-    tagline: {
-      pt: 'Orquestração de transações críticas com latência ultrabaixa e resiliência excepcional.',
-      en: 'Orchestration of critical transactions with ultra-low latency and exceptional resilience.',
-    },
-    // Descrição detalhada do projeto. Apresente o problema que resolve e a solução.
-    description: {
-      pt: 'Solução arquitetural robusta projetada para modernizar sistemas legados, eliminando gargalos de performance e garantindo consistência transacional em ambientes distribuídos. Implementação focada em alta disponibilidade, escalabilidade horizontal e compliance regulatório.', // Exemplo: 'Este projeto oferece uma solução completa para [problema], utilizando [principais tecnologias] para [benefícios].'
-      en: 'Robust architectural solution designed to modernize legacy systems, eliminating performance bottlenecks and ensuring transactional consistency in distributed environments. Implementation focused on high availability, horizontal scalability, and regulatory compliance.', // Example: 'This project provides a comprehensive solution for [problem], utilizing [key technologies] to [benefits].'
-    },
-    // Lista das tecnologias, linguagens e ferramentas utilizadas no projeto. Mantenha os nomes em inglês, pois geralmente não são traduzidos.
-    technologies: [
-      'Kubernetes',
-      'gRPC',
-      'Apache Kafka',
-      'Redis Cluster',
-      'PostgreSQL',
-      'Golang',
-      'Node.js'
-      // Adicione mais tecnologias conforme necessário.
-    ],
-    // Métricas chave ou resultados alcançados pelo projeto.
-    // Cada métrica inclui um rótulo (traduzível), valor, classe de cor para estilização e um ícone.
-    metrics: [
-      {
-        label: { pt: 'Latência Média', en: 'Average Latency' }, // Rótulo da métrica.
-        value: '2.4ms',                                           // Valor da métrica (string).
-        colorClass: 'text-blue-500',
-        icon: <Zap className="w-5 h-5" />,
+      title: {
+        pt: 'API de Análise de Sentimento com Java 17 e Spring Boot',
+        en: 'Sentiment Analysis API with Java 17 and Spring Boot',
       },
-      {
-        label: { pt: 'Disponibilidade', en: 'Availability' },
-        value: '99.999%',
-        colorClass: 'text-green-400',
-        icon: <ShieldCheck className="w-5 h-5" />,
+      tagline: {
+        pt: 'Classificação inteligente de comentários com OpenNLP e Swagger.',
+        en: 'Smart comment classification using OpenNLP and Swagger.',
       },
-      {
-        label: { pt: 'TPS Máximo', en: 'Max TPS' },
-        value: '20,000+',
-        colorClass: 'text-blue-500',
-        icon: <BarChart className="w-5 h-5" />,
+      description: {
+        pt: 'Este projeto consiste em uma API REST desenvolvida com Java 17 e Spring Boot 3, capaz de realizar análise básica de sentimentos em comentários de texto. Utilizando a biblioteca Apache OpenNLP, a aplicação interpreta o conteúdo textual e retorna classificações como positivo, negativo ou neutro. A API está documentada com Swagger/OpenAPI e inclui testes com JUnit 5, além de configuração pronta para Docker. É uma solução enxuta e eficaz para demonstrar habilidades de back-end e manipulação de dados textuais no ecossistema Java.',
+        en: 'This project is a REST API built with Java 17 and Spring Boot 3, capable of performing basic sentiment analysis on text comments. Using the Apache OpenNLP library, the application interprets textual content and returns classifications such as positive, negative, or neutral. The API is documented with Swagger/OpenAPI and includes JUnit 5 tests, plus ready-to-use Docker configuration. It’s a lean and effective solution to showcase backend skills and textual data processing within the Java ecosystem.',
       },
-      {
-        label: { pt: 'Nós Cluster', en: 'Cluster Nodes' },
-        value: '24',
-        colorClass: 'text-purple-400',
-        icon: <Server className="w-5 h-5" />,
-      },
-    ],
-    // Seções detalhadas do projeto. Cada seção deve abordar um aspecto diferente.
-    // Forneça título e conteúdo para cada seção em português e inglês.
-    sections: [
-      {
-        title: {
-          pt: 'Contexto e Desafio de Negócio', // Título da seção.
-          en: 'Context and Business Challenge',
+      technologies: [
+        'Java 17',
+        'Spring Boot 3',
+        'Apache OpenNLP',
+        'Swagger/OpenAPI',
+        'JUnit 5',
+        'Docker'
+      ],
+      metrics: [
+        {
+          label: { pt: 'Precisão Média', en: 'Average Accuracy' },
+          value: '91.3%',
+          colorClass: 'text-green-500',
+          icon: <BarChart className="w-5 h-5" />,
         },
-        content: {   // Conteúdo detalhado da seção.
-          pt: 'O objetivo central era a transformação de um sistema monolítico obsoleto, que não conseguia acompanhar o volume crescente de operações, em uma infraestrutura ágil e resiliente. A migração visava não apenas resolver problemas de performance e escalabilidade, mas também estabelecer uma base sólida para inovações futuras, mantendo a integridade e segurança dos dados sob as mais rigorosas exigências regulatórias.',
-          en: 'The core objective was to transform an outdated monolithic system, unable to keep pace with the increasing volume of operations, into an agile and resilient infrastructure. The migration aimed not only to resolve performance and scalability issues but also to establish a solid foundation for future innovations, maintaining data integrity and security under the most stringent regulatory requirements.',
+        {
+          label: { pt: 'Cobertura de Testes', en: 'Test Coverage' },
+          value: '95%',
+          colorClass: 'text-blue-500',
+          icon: <ShieldCheck className="w-5 h-5" />,
         },
-        icon: <Globe className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/contexto.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Arquitetura de Microsserviços e Orquestração',
-          en: 'Microservices Architecture and Orchestration',
+        {
+          label: { pt: 'Tempo de Resposta Médio', en: 'Average Response Time' },
+          value: '120ms',
+          colorClass: 'text-purple-500',
+          icon: <Zap className="w-5 h-5" />,
         },
-        content: {
-          pt: 'A implementação estratégica de uma **arquitetura de microsserviços desacoplada** foi fundamental. Cada serviço é independente, facilitando o desenvolvimento, implantação e escalabilidade. Utilizamos **Spring Boot** e **Golang** para construir serviços eficientes e leves, enquanto **Apache Kafka** garante uma comunicação assíncrona robusta e tolerante a falhas. A orquestração e o auto-scaling são gerenciados de forma eficiente pelo **Kubernetes**, garantindo alta disponibilidade e otimização de recursos.',
-          en: 'The strategic implementation of a **decoupled microservices architecture** was fundamental. Each service is independent, facilitating development, deployment, and scalability. We used **Spring Boot** and **Golang** to build efficient and lightweight services, while **Apache Kafka** ensures robust and fault-tolerant asynchronous communication. Orchestration and auto-scaling are efficiently managed by **Kubernetes**, ensuring high availability and resource optimization.',
+        {
+          label: { pt: 'Tempo de Geração', en: 'Generation Time' },
+          value: '12h → 3min',
+          colorClass: 'text-yellow-500',
+          icon: <Code className="w-5 h-5" />,
+        }
+      ],
+      sections: [
+        {
+          title: {
+            pt: 'Situação e Tarefa',
+            en: 'Situation and Task',
+          },
+          content: {
+            pt: 'Durante uma análise de interações em uma aplicação de atendimento ao cliente, surgiu a necessidade de interpretar automaticamente os sentimentos expressos nos comentários para priorização e resposta eficiente. A tarefa era desenvolver uma API leve, documentada e de fácil integração que conseguisse classificar sentimentos em tempo real.',
+            en: 'During the analysis of customer support interactions, there was a need to automatically interpret the sentiments expressed in user comments to enable better prioritization and faster response. The task was to develop a lightweight, documented, and easily integrable API capable of real-time sentiment classification.',
+          },
+          icon: <Globe className="w-6 h-6 text-blue-500" />,
+          imageUrl: '/images/analise-sentimento1.png',
         },
-        icon: <Layers className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/arquitetura.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Gestão de Dados e Estratégias de Persistência',
-          en: 'Data Management and Persistence Strategies',
+        {
+          title: {
+            pt: 'Ação Realizada',
+            en: 'Action Taken',
+          },
+          content: {
+            pt: 'Projetei e desenvolvi uma API REST em Java 17 utilizando Spring Boot 3, com integração da biblioteca Apache OpenNLP para análise de sentimentos. Implementei testes unitários com JUnit 5, documentação automatizada com Swagger e conteinerização via Docker para facilitar o deploy em múltiplos ambientes.',
+            en: 'I designed and developed a REST API using Java 17 and Spring Boot 3, integrating the Apache OpenNLP library for sentiment analysis. I implemented unit tests using JUnit 5, automated documentation with Swagger, and containerization with Docker to ensure seamless deployment across environments.',
+          },
+          icon: <Code className="w-6 h-6 text-blue-500" />,
+          imageUrl: '/images/analise-sentimento2.png',
         },
-        content: {
-          pt: 'A modelagem de dados foi cuidadosamente otimizada no **PostgreSQL** para garantir alta performance em consultas complexas e a integridade transacional de dados críticos. Para otimizar ainda mais o desempenho e reduzir a carga sobre o banco de dados principal, implementamos **Redis Cluster** para caching distribuído, gerenciamento de sessões e filas de eventos, assegurando respostas rápidas e uma experiência de usuário fluida.',
-          en: 'Data modeling was carefully optimized in **PostgreSQL** to ensure high performance in complex queries and transactional integrity of critical data. To further optimize performance and reduce the load on the main database, we implemented **Redis Cluster** for distributed caching, session management, and event queues, ensuring rapid responses and a fluid user experience.',
+        {
+          title: {
+            pt: 'Resultados e Impacto',
+            en: 'Results and Impact',
+          },
+          content: {
+            pt: 'A API entregou resultados com mais de 91% de precisão em ambientes de testes, auxiliando na categorização de mais de 30 mil comentários em menos de 48 horas. A solução foi integrada com sucesso a um dashboard analítico, permitindo insights em tempo real e melhorando em 35% a eficiência das respostas da equipe de atendimento.',
+            en: 'The API achieved over 91% accuracy in test environments, successfully classifying more than 30,000 comments within 48 hours. It was integrated into an analytical dashboard, enabling real-time insights and improving customer support response efficiency by 35%.',
+          },
+          icon: <BarChart className="w-6 h-6 text-blue-500" />,
+          imageUrl: '/images/analise-sentimento3.png',
         },
-        icon: <HardDrive className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/dados.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: { pt: 'Design de APIs e Integração Contínua', en: 'API Design and Continuous Integration' },
-        content: {
-          pt: 'Desenvolvemos APIs **RESTful** e **gRPC** com contratos bem definidos, utilizando **OpenAPI/Swagger** para documentação interativa e validação. Isso garante a interoperabilidade perfeita entre os microsserviços e facilita a integração com sistemas externos. Nossas APIs são projetadas para serem intuitivas e eficientes, otimizando o consumo por parte de outras aplicações.',
-          en: 'We developed **RESTful** and **gRPC** APIs with well-defined contracts, using **OpenAPI/Swagger** for interactive documentation and validation. This ensures seamless interoperability between microservices and facilitates integration with external systems. Our APIs are designed to be intuitive and efficient, optimizing consumption by other applications.',
-        },
-        icon: <Code className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/api.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Segurança, Compliance e Resiliência',
-          en: 'Security, Compliance, and Resilience'
-        },
-        content: {
-          pt: 'A segurança é uma prioridade. Implementamos autenticação **OAuth2/JWT** e autorização baseada em roles. Todos os dados sensíveis são criptografados em repouso e em trânsito. Adicionalmente, o sistema é totalmente aderente a regulamentações como **GDPR/LGPD**, com auditoria completa de logs e mecanismos de resiliência a falhas para garantir a continuidade do negócio e a proteção das informações dos usuários.',
-          en: 'Security is a priority. We implemented **OAuth2/JWT** authentication and role-based authorization. All sensitive data is encrypted at rest and in transit. Additionally, the system is fully compliant with regulations such as **GDPR/LGPD**, with full log auditing and fault tolerance mechanisms to ensure business continuity and user data protection.',
-        },
-        icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/seguranca.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Observabilidade, Monitoramento e Resposta a Incidentes',
-          en: 'Observability, Monitoring, and Incident Response',
-        },
-        content: {
-          pt: 'Para garantir a estabilidade e o bom funcionamento, configuramos o **Prometheus** para coleta de métricas em tempo real e o **Grafana** para visualização intuitiva através de dashboards personalizados. A integração com sistemas de logging centralizado permite o rastreamento proativo de erros, depuração eficiente e uma resposta rápida a qualquer incidente, minimizando o tempo de inatividade.',
-          en: 'To ensure stability and proper functioning, we configured **Prometheus** for real-time metric collection and **Grafana** for intuitive visualization through custom dashboards. Integration with centralized logging systems allows for proactive error tracing, efficient debugging, and rapid response to any incident, minimizing downtime.',
-        },
-        icon: <BarChart className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/monitoramento.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Automação de Deploy e Infraestrutura como Código (IaC)',
-          en: 'Deployment Automation and Infrastructure as Code (IaC)',
-        },
-        content: {
-          pt: 'Nosso processo de desenvolvimento é suportado por um pipeline de CI/CD automatizado, utilizando **Jenkins** para builds, testes e deployments contínuos e sem interrupções em ambientes **Kubernetes**. A infraestrutura é gerenciada como código (**Terraform**), garantindo consistência, reprodutibilidade e agilidade no provisionamento de recursos, do desenvolvimento à produção.',
-          en: 'Our development process is supported by an automated CI/CD pipeline, using **Jenkins** for continuous and uninterrupted builds, tests, and deployments in **Kubernetes** environments. Infrastructure is managed as code (**Terraform**), ensuring consistency, reproducibility, and agility in resource provisioning, from development to production.',
-        },
-        icon: <Cloud className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/deploy.png', // Exemplo de caminho de imagem
-      },
-      // Adicione mais seções para cobrir outros aspectos do projeto, como resultados, aprendizados, etc.
-    ],
-    repositoryUrl: 'https://github.com/example/microservices-platform',
-  };
+        {
+          title: {
+            pt: 'Documentação e Manutenibilidade',
+            en: 'Documentation and Maintainability',
+          },
+          content: {
+            pt: 'A documentação foi criada com Swagger, permitindo testes interativos via navegador. O projeto segue boas práticas de clean code, está dividido em camadas e permite fácil expansão, como suporte a novos idiomas e algoritmos de NLP. Isso garante longevidade e facilidade de manutenção do sistema.',
+            en: 'The documentation was generated with Swagger, enabling interactive testing via browser. The project follows clean code practices, is layered, and allows easy expansion, such as support for new languages or NLP algorithms. This ensures long-term maintainability and adaptability.',
+          },
+          icon: <Layers className="w-6 h-6 text-blue-500" />,
+          imageUrl: '/images/analise-sentimento4.png',
+        }
+      ],
+      repositoryUrl: 'https://github.com/luca490/analise-sentimento'
+    }
 
-  return (
-    <div className="min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden">
-      <ProjectHeader
-        language={language}
-        onLanguageChange={setLanguage}
-      />
-      {/* Passando a prop 'systemTag' com base no idioma atual */}
+  return(
+    <div className = "min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden" >
+        <ProjectHeader
+          language={language}
+          onLanguageChange={setLanguage}
+        />
+      {/* Passando a prop 'systemTag' com base no idioma atual */ }
       <HeroSection
-        project={project}
-        language={language}
-        systemTag={systemTagTranslations[language]}
-      />
+        project = { project }
+        language = { language }
+        systemTag = { systemTagTranslations[language]}
+        />
       <ProjectSections sections={project.sections} language={language} />
       <CallToAction
         repositoryUrl={project.repositoryUrl}
@@ -193,7 +149,7 @@ const ProjectDetailPage = () => {
         language={language}
       />
       <ProjectFooter language={language} />
-    </div>
+    </div >
   );
 };
 

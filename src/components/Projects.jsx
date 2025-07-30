@@ -61,10 +61,10 @@ const Projects = ({ language = 'en' }) => {
       projects: [
         {
           id: 1,
-          title: "Sistema de Cadastro de Alunos",
-          description: "API RESTful com Java 17 e Spring Boot para gerenciar alunos com banco de dados MySQL.",
+          title: "Gestão de livros com Spring Boot",
+          description: "Solução completa de CRUD para catálogo de livros com documentação Swagger e deploy Docker.",
           icon: <Database size={32} className="text-yellow-400" />,
-          tags: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "REST API"],
+          tags: ["Java", "Spring Boot", "Spring Data JPA", "Docker", "REST API"],
           href: "/projects/cadastro-alunos",
         },
         {
@@ -72,7 +72,7 @@ const Projects = ({ language = 'en' }) => {
           title: "Dashboards Power BI",
           description: "Visualizações interativas com Power BI baseadas em dados CSV e Excel, focadas em áreas estratégicas (Vendas, RH e Logística).",
           icon: <LineChart size={32} className="text-yellow-400" />,
-          tags: ["Power BI", "Excel/CSV", "Visualização de Dados", "Dashboards", "Business Intelligence"],
+          tags: ["Power BI", "Excel/CSV", "Visualização de Dados", "Dashboards", "Business Intelligence", "DAX", "SQL Server"],
           href: "/projects/dashboards-bi",
         },
         {
@@ -88,7 +88,7 @@ const Projects = ({ language = 'en' }) => {
           title: "API de Análise de Vendas",
           description: "API que recebe dados de vendas (CSV/JSON), armazena em banco e gera análises como total por região, média mensal e ranking de produtos. Ideal para transformar dados brutos em insights.",
           icon: <Code size={32} className="text-yellow-400" />,
-          tags: ["Java", "Spring Boot", "PostgreSQL", "JPA", "RESTful API", "Lombok", "MVC", "Análise de Dados"],
+          tags: ["Python", "Pandas", "SeaBorn", "Matplotlib", "Análise de dados", "Git", "Jupyter Notebook"],
           href: "/projects/analise-vendas",
         },
       ]

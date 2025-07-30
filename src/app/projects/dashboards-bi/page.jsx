@@ -6,12 +6,17 @@ import {
   Code,
   Server,
   BarChart,
-  ShieldCheck,
+  BarChart3,
+  Target,
+  TrendingUp,
   Zap,
   Cloud,
   Layers,
   HardDrive,
   Globe,
+  Truck,
+  Users,
+  LayoutDashboard
 } from 'lucide-react';
 import ProjectHeader from '@/components/ProjectHeader';
 import HeroSection from '@/components/HeroProject';
@@ -31,148 +36,105 @@ const ProjectDetailPage = () => {
 
   // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
-    // Título do projeto. Forneça o título em português e inglês.
     title: {
-      pt: 'Plataforma de Microsserviços de Alta Performance',
-      en: 'High-Performance Microservices Platform',
+      pt: 'Coleção de Dashboards Interativos no Power BI',
+      en: 'Collection of Interactive Dashboards in Power BI',
     },
-    // Slogan ou frase de efeito curta que resume o projeto. Exemplo: 'Inovando a forma como interagimos com [Tecnologia/Setor]'
     tagline: {
-      pt: 'Orquestração de transações críticas com latência ultrabaixa e resiliência excepcional.',
-      en: 'Orchestration of critical transactions with ultra-low latency and exceptional resilience.',
+      pt: 'Análises dinâmicas de Vendas, Logística e RH para decisões estratégicas baseadas em dados.',
+      en: 'Dynamic analysis of Sales, Logistics, and HR for data-driven strategic decisions.',
     },
-    // Descrição detalhada do projeto. Apresente o problema que resolve e a solução.
     description: {
-      pt: 'Solução arquitetural robusta projetada para modernizar sistemas legados, eliminando gargalos de performance e garantindo consistência transacional em ambientes distribuídos. Implementação focada em alta disponibilidade, escalabilidade horizontal e compliance regulatório.', // Exemplo: 'Este projeto oferece uma solução completa para [problema], utilizando [principais tecnologias] para [benefícios].'
-      en: 'Robust architectural solution designed to modernize legacy systems, eliminating performance bottlenecks and ensuring transactional consistency in distributed environments. Implementation focused on high availability, horizontal scalability, and regulatory compliance.', // Example: 'This project provides a comprehensive solution for [problem], utilizing [key technologies] to [benefits].'
+      pt: 'Este repositório reúne projetos desenvolvidos no Power BI com foco em análise de dados corporativos. Os dashboards foram criados a partir de diferentes fontes de dados e exploram indicadores-chave como faturamento, volume de vendas, controle logístico e gestão de pessoas. Cada relatório oferece visualizações dinâmicas que facilitam a tomada de decisões baseadas em dados, com foco em performance, eficiência e estratégia empresarial.',
+      en: 'This repository brings together projects developed in Power BI focused on corporate data analysis. The dashboards were created from diverse data sources and explore key metrics such as revenue, sales volume, logistics control, and people management. Each report offers dynamic visualizations that facilitate data-driven decision-making, emphasizing performance, efficiency, and business strategy.',
     },
-    // Lista das tecnologias, linguagens e ferramentas utilizadas no projeto. Mantenha os nomes em inglês, pois geralmente não são traduzidos.
     technologies: [
-      'Kubernetes',
-      'gRPC',
-      'Apache Kafka',
-      'Redis Cluster',
-      'PostgreSQL',
-      'Golang',
-      'Node.js'
-      // Adicione mais tecnologias conforme necessário.
+      'Power BI',
+      'DAX',
+      'Power Query',
+      'Excel',
+      'SQL Server',
+      'Azure Blob Storage'
     ],
-    // Métricas chave ou resultados alcançados pelo projeto.
-    // Cada métrica inclui um rótulo (traduzível), valor, classe de cor para estilização e um ícone.
     metrics: [
       {
-        label: { pt: 'Latência Média', en: 'Average Latency' }, // Rótulo da métrica.
-        value: '2.4ms',                                           // Valor da métrica (string).
-        colorClass: 'text-blue-500',
-        icon: <Zap className="w-5 h-5" />,
-      },
-      {
-        label: { pt: 'Disponibilidade', en: 'Availability' },
-        value: '99.999%',
-        colorClass: 'text-green-400',
-        icon: <ShieldCheck className="w-5 h-5" />,
-      },
-      {
-        label: { pt: 'TPS Máximo', en: 'Max TPS' },
-        value: '20,000+',
+        label: { pt: 'Indicadores de Vendas', en: 'Sales KPIs' },
+        value: '120+',
         colorClass: 'text-blue-500',
         icon: <BarChart className="w-5 h-5" />,
       },
       {
-        label: { pt: 'Nós Cluster', en: 'Cluster Nodes' },
-        value: '24',
+        label: { pt: 'Eficiência Logística', en: 'Logistics Efficiency' },
+        value: '↑ 18%',
+        colorClass: 'text-green-400',
+        icon: <Truck className="w-5 h-5" />,
+      },
+      {
+        label: { pt: 'Redução de Retrabalho em RH', en: 'HR Rework Reduction' },
+        value: '↓ 30%',
         colorClass: 'text-purple-400',
-        icon: <Server className="w-5 h-5" />,
+        icon: <Users className="w-5 h-5" />,
+      },
+      {
+        label: { pt: 'Painéis Criados', en: 'Dashboards Created' },
+        value: '3',
+        colorClass: 'text-yellow-400',
+        icon: <LayoutDashboard className="w-5 h-5" />,
       },
     ],
-    // Seções detalhadas do projeto. Cada seção deve abordar um aspecto diferente.
-    // Forneça título e conteúdo para cada seção em português e inglês.
     sections: [
       {
         title: {
-          pt: 'Contexto e Desafio de Negócio', // Título da seção.
-          en: 'Context and Business Challenge',
+          pt: 'Situação e Desafio de Negócio',
+          en: 'Situation and Business Challenge',
         },
-        content: {   // Conteúdo detalhado da seção.
-          pt: 'O objetivo central era a transformação de um sistema monolítico obsoleto, que não conseguia acompanhar o volume crescente de operações, em uma infraestrutura ágil e resiliente. A migração visava não apenas resolver problemas de performance e escalabilidade, mas também estabelecer uma base sólida para inovações futuras, mantendo a integridade e segurança dos dados sob as mais rigorosas exigências regulatórias.',
-          en: 'The core objective was to transform an outdated monolithic system, unable to keep pace with the increasing volume of operations, into an agile and resilient infrastructure. The migration aimed not only to resolve performance and scalability issues but also to establish a solid foundation for future innovations, maintaining data integrity and security under the most stringent regulatory requirements.',
+        content: {
+          pt: 'A organização enfrentava um grande desafio: as decisões estratégicas eram tomadas com base em relatórios manuais, descentralizados e suscetíveis a erros. As áreas de Vendas, Logística e Recursos Humanos não possuíam indicadores claros e atualizados, o que prejudicava a eficiência e a performance da operação.',
+          en: 'The organization faced a major challenge: strategic decisions were based on manual, decentralized, and error-prone reports. Sales, Logistics, and Human Resources lacked clear and up-to-date indicators, which impaired operational efficiency and performance.',
         },
         icon: <Globe className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/contexto.png', // Exemplo de caminho de imagem
+        imageUrl: '/images/powerbi1.png',
       },
       {
         title: {
-          pt: 'Arquitetura de Microsserviços e Orquestração',
-          en: 'Microservices Architecture and Orchestration',
+          pt: 'Tarefa e Objetivo',
+          en: 'Task and Objective',
         },
         content: {
-          pt: 'A implementação estratégica de uma **arquitetura de microsserviços desacoplada** foi fundamental. Cada serviço é independente, facilitando o desenvolvimento, implantação e escalabilidade. Utilizamos **Spring Boot** e **Golang** para construir serviços eficientes e leves, enquanto **Apache Kafka** garante uma comunicação assíncrona robusta e tolerante a falhas. A orquestração e o auto-scaling são gerenciados de forma eficiente pelo **Kubernetes**, garantindo alta disponibilidade e otimização de recursos.',
-          en: 'The strategic implementation of a **decoupled microservices architecture** was fundamental. Each service is independent, facilitating development, deployment, and scalability. We used **Spring Boot** and **Golang** to build efficient and lightweight services, while **Apache Kafka** ensures robust and fault-tolerant asynchronous communication. Orchestration and auto-scaling are efficiently managed by **Kubernetes**, ensuring high availability and resource optimization.',
+          pt: 'O objetivo era criar uma solução centralizada e automatizada para consolidar dados de múltiplas fontes e apresentar KPIs relevantes por meio de dashboards interativos e atualizados em tempo real. A meta era fornecer insights estratégicos e operacionais para os líderes de cada área.',
+          en: 'The goal was to create a centralized and automated solution to consolidate data from multiple sources and present relevant KPIs through interactive dashboards updated in real time. The aim was to provide strategic and operational insights to the leadership of each department.',
         },
-        icon: <Layers className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/arquitetura.png', // Exemplo de caminho de imagem
+        icon: <Target className="w-6 h-6 text-blue-500" />,
+        imageUrl: '/images/powerbi2.png',
       },
       {
         title: {
-          pt: 'Gestão de Dados e Estratégias de Persistência',
-          en: 'Data Management and Persistence Strategies',
+          pt: 'Ações e Soluções Implementadas',
+          en: 'Actions and Solutions Implemented',
         },
         content: {
-          pt: 'A modelagem de dados foi cuidadosamente otimizada no **PostgreSQL** para garantir alta performance em consultas complexas e a integridade transacional de dados críticos. Para otimizar ainda mais o desempenho e reduzir a carga sobre o banco de dados principal, implementamos **Redis Cluster** para caching distribuído, gerenciamento de sessões e filas de eventos, assegurando respostas rápidas e uma experiência de usuário fluida.',
-          en: 'Data modeling was carefully optimized in **PostgreSQL** to ensure high performance in complex queries and transactional integrity of critical data. To further optimize performance and reduce the load on the main database, we implemented **Redis Cluster** for distributed caching, session management, and event queues, ensuring rapid responses and a fluid user experience.',
+          pt: 'Desenvolvi dashboards no Power BI conectados a bases em Excel, SQL Server e Azure, utilizando **Power Query** para transformação de dados e **DAX** para criação de métricas avançadas. Implantamos filtros dinâmicos, gráficos personalizados e segmentações por região, período e equipe. Automatizamos a atualização dos relatórios via **Gateway Pessoal** e organizamos os projetos em workspaces com permissões hierárquicas.',
+          en: 'I Have developed dashboards in Power BI connected to Excel, SQL Server, and Azure databases, using **Power Query** for data transformation and **DAX** for creating advanced metrics. We implemented dynamic filters, customized visuals, and segmentations by region, time, and team. Reports were automatically updated via **Personal Gateway** and structured in workspaces with hierarchical permissions.',
         },
-        icon: <HardDrive className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/dados.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: { pt: 'Design de APIs e Integração Contínua', en: 'API Design and Continuous Integration' },
-        content: {
-          pt: 'Desenvolvemos APIs **RESTful** e **gRPC** com contratos bem definidos, utilizando **OpenAPI/Swagger** para documentação interativa e validação. Isso garante a interoperabilidade perfeita entre os microsserviços e facilita a integração com sistemas externos. Nossas APIs são projetadas para serem intuitivas e eficientes, otimizando o consumo por parte de outras aplicações.',
-          en: 'We developed **RESTful** and **gRPC** APIs with well-defined contracts, using **OpenAPI/Swagger** for interactive documentation and validation. This ensures seamless interoperability between microservices and facilitates integration with external systems. Our APIs are designed to be intuitive and efficient, optimizing consumption by other applications.',
-        },
-        icon: <Code className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/api.png', // Exemplo de caminho de imagem
+        icon: <BarChart3 className="w-6 h-6 text-blue-500" />,
+        imageUrl: '/images/powerbi3.png',
       },
       {
         title: {
-          pt: 'Segurança, Compliance e Resiliência',
-          en: 'Security, Compliance, and Resilience'
+          pt: 'Resultados e Impacto Estratégico',
+          en: 'Results and Strategic Impact',
         },
         content: {
-          pt: 'A segurança é uma prioridade. Implementamos autenticação **OAuth2/JWT** e autorização baseada em roles. Todos os dados sensíveis são criptografados em repouso e em trânsito. Adicionalmente, o sistema é totalmente aderente a regulamentações como **GDPR/LGPD**, com auditoria completa de logs e mecanismos de resiliência a falhas para garantir a continuidade do negócio e a proteção das informações dos usuários.',
-          en: 'Security is a priority. We implemented **OAuth2/JWT** authentication and role-based authorization. All sensitive data is encrypted at rest and in transit. Additionally, the system is fully compliant with regulations such as **GDPR/LGPD**, with full log auditing and fault tolerance mechanisms to ensure business continuity and user data protection.',
+          pt: 'Como resultado, a empresa passou a tomar decisões baseadas em dados atualizados, reduzindo o tempo de geração de relatórios em 85%. O setor de Vendas otimizou campanhas com base em sazonalidade e performance regional. A Logística identificou gargalos operacionais, aumentando a eficiência em 18%. O RH reduziu o retrabalho na gestão de ponto e absenteísmo em 30%. Os painéis foram apresentados em reuniões de diretoria e passaram a guiar planos de ação mensais.',
+          en: 'As a result, the company began making decisions based on updated data, reducing report generation time by 85%. The Sales department optimized campaigns based on seasonality and regional performance. Logistics identified operational bottlenecks, improving efficiency by 18%. HR reduced rework in attendance and absenteeism management by 30%. The dashboards were presented in board meetings and began guiding monthly action plans.',
         },
-        icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/seguranca.png', // Exemplo de caminho de imagem
+        icon: <TrendingUp className="w-6 h-6 text-blue-500" />,
+        imageUrl: '/images/powerbi4.png',
       },
-      {
-        title: {
-          pt: 'Observabilidade, Monitoramento e Resposta a Incidentes',
-          en: 'Observability, Monitoring, and Incident Response',
-        },
-        content: {
-          pt: 'Para garantir a estabilidade e o bom funcionamento, configuramos o **Prometheus** para coleta de métricas em tempo real e o **Grafana** para visualização intuitiva através de dashboards personalizados. A integração com sistemas de logging centralizado permite o rastreamento proativo de erros, depuração eficiente e uma resposta rápida a qualquer incidente, minimizando o tempo de inatividade.',
-          en: 'To ensure stability and proper functioning, we configured **Prometheus** for real-time metric collection and **Grafana** for intuitive visualization through custom dashboards. Integration with centralized logging systems allows for proactive error tracing, efficient debugging, and rapid response to any incident, minimizing downtime.',
-        },
-        icon: <BarChart className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/monitoramento.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Automação de Deploy e Infraestrutura como Código (IaC)',
-          en: 'Deployment Automation and Infrastructure as Code (IaC)',
-        },
-        content: {
-          pt: 'Nosso processo de desenvolvimento é suportado por um pipeline de CI/CD automatizado, utilizando **Jenkins** para builds, testes e deployments contínuos e sem interrupções em ambientes **Kubernetes**. A infraestrutura é gerenciada como código (**Terraform**), garantindo consistência, reprodutibilidade e agilidade no provisionamento de recursos, do desenvolvimento à produção.',
-          en: 'Our development process is supported by an automated CI/CD pipeline, using **Jenkins** for continuous and uninterrupted builds, tests, and deployments in **Kubernetes** environments. Infrastructure is managed as code (**Terraform**), ensuring consistency, reproducibility, and agility in resource provisioning, from development to production.',
-        },
-        icon: <Cloud className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/deploy.png', // Exemplo de caminho de imagem
-      },
-      // Adicione mais seções para cobrir outros aspectos do projeto, como resultados, aprendizados, etc.
     ],
-    repositoryUrl: 'https://github.com/example/microservices-platform',
+    repositoryUrl: 'https://github.com/luca490/projetos-powerbi',
   };
+
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden">

@@ -1,9 +1,10 @@
 import "./globals.css";
 
-// Dados
+// Dados Profissionais
 const professionalData = {
   name: "Lucas de Lima Oliveira",
-  site: "https://www.lksdata.com.br",
+  mainSite: "https://www.lksdata.com.br",
+  aliasSite: "https://lks-data.vercel.app", 
   role: "Analista de Dados Power BI",
   skills: [
     "Python", "Java", "Spring Boot", "SQL", "MongoDB", "AWS", "Azure",
@@ -11,7 +12,8 @@ const professionalData = {
     "Machine Learning", "Big Data Analytics", "ETL", "Data Lakes",
     "Pipelines de Dados", "Processamento de Linguagem Natural", "Visão Computacional",
     "Automação de Dados", "Otimização de Dados", "Airflow", "Relatórios Automatizados",
-    "DAX", "Power Query", "Dashboarding", "Business Intelligence"
+    "DAX", "Power Query", "Dashboarding", "Business Intelligence", "Estratégia de Dados",
+    "Consultoria Power BI", "Engenharia de Dados", "Cientista de Dados", "Gestão de Dados"
   ],
   socialLinks: {
     linkedin: "https://www.linkedin.com/in/lucaslima020106/",
@@ -22,36 +24,59 @@ const professionalData = {
 };
 
 export const metadata = {
-  title: "LKS Data - Soluções em Dados de Alto Impacto | Análise de Dados",
+  title: "LKS Data: Soluções em Análise de Dados e Power BI | Consultoria Especializada",
   description:
-    "LKS Data transforma dados brutos em insights poderosos que impulsionam sua empresa para o próximo nível. Soluções inovadoras em análise de dados.",
+    "Transformamos dados brutos em insights estratégicos. A LKS Data oferece consultoria em Análise de Dados, Power BI, ETL e Big Data para impulsionar o sucesso da sua empresa. Descubra nossas soluções em dados de alto impacto.",
+
   authors: [
-    { name: "Lucas de Lima Oliveira", url: "https://www.lksdata.com.br" },
+    { name: "Lucas de Lima Oliveira", url: professionalData.mainSite },
     { name: "Portfólio desenvolvido por Emilly Budri Bognar", url: "https://budri.com.br" }
   ],
+  
+  // Robôs e GoogleBot para garantir indexação e rastreamento completo
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
+      "max-snippet": -1, 
+      "max-image-preview": "large", 
+      "max-video-preview": -1, 
     },
   },
+  
+  // Open Graph para compartilhamento otimizado em redes sociais
   openGraph: {
-    title: "LKS Data - Soluções em Dados de Alto Impacto | Análise de Dados",
-    description: "LKS Data transforma dados brutos em insights poderosos que impulsionam sua empresa para o próximo nível. Soluções inovadoras em análise de dados.",
-    url: "https://www.lksdata.com.br",
+    title: "LKS Data: Soluções em Análise de Dados e Power BI | Consultoria Especializada",
+    description: "Transformamos dados brutos em insights estratégicos. A LKS Data oferece consultoria em Análise de Dados, Power BI, ETL e Big Data para impulsionar o sucesso da sua empresa. Descubra nossas soluções em dados de alto impacto.",
+    url: professionalData.mainSite,
     siteName: "LKS Data",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: `${professionalData.mainSite}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'LKS Data - Soluções em Análise de Dados e Power BI',
+      },
+    ],
   },
+  
+  // Ícones do site
   icons: {
-    icon: "/favicon.ico", 
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png", 
+    apple: "/apple-touch-icon.png", 
   },
-  metadataBase: new URL("https://www.lksdata.com.br"),
+  
+  metadataBase: new URL(professionalData.mainSite),
   alternates: {
-    canonical: "/",
+    canonical: professionalData.mainSite,
   },
+  
+  // Palavras-chave 
   keywords: [
     ...professionalData.skills,
     "LKS Data", "Soluções em Dados", "Análise de Dados", "Power BI",
@@ -62,9 +87,15 @@ export const metadata = {
     "Transformação Digital com Dados", "Lucas de Lima Oliveira", "Analista de Dados Brasil",
     "Portfólio Análise de Dados", "Consultoria Power BI", "Especialista Power BI",
     "Desenvolvimento de Dashboards", "Data Mining", "Modelagem de Dados", "Governança de Dados",
-    "Tendências em Dados 2025", "Business Intelligence", "Visualização de Dados"
+    "Tendências em Dados 2025", "Business Intelligence", "Visualização de Dados",
+    "Estruturação de Dados", "Treinamento Power BI", "Suporte Power BI", "Serviços de BI",
+    "Otimização de Performance Power BI", "Integração de Dados", "Ferramentas de BI",
+    "KPIs", "Métricas de Negócio", "Automatização de Relatórios", "Data Storytelling",
+    "Inteligência Artificial em Dados", "Analytics", "Especialista em Dados",
+    "Engenheiro de Dados", "Cientista de Dados Freelancer", "Consultor de BI"
   ],
   category: "technology",
+  
 };
 
 export default function RootLayout({ children }) {
@@ -79,41 +110,78 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
         />
 
-        {/* Pré-carregamento de recursos críticos */}
+        {/* Pré-carregamento de recursos críticos e otimização de fontes */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-
-        {/* Structured Data com informações verificáveis */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              name: professionalData.name,
-              url: professionalData.site,
-              jobTitle: professionalData.role,
-              knowsAbout: professionalData.skills,
-              sameAs: Object.values(professionalData.socialLinks),
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: professionalData.location.split(", ")[0],
-                addressRegion: professionalData.location.split(", ")[1],
-                addressCountry: "BR",
-              },
-              contributor: {
-                "@type": "Person",
-                name: "Emilly Budri Bognar",
-                url: "https://budri.com.br"
-              }
+              "@graph": [
+                {
+                  "@type": "Person",
+                  name: professionalData.name,
+                  url: professionalData.mainSite,
+                  sameAs: [
+                    ...Object.values(professionalData.socialLinks),
+                    professionalData.aliasSite 
+                  ],
+                  jobTitle: professionalData.role,
+                  knowsAbout: professionalData.skills,
+                  description: professionalData.description,
+                  mainEntityOfPage: {
+                    "@type": "WebPage",
+                    "@id": professionalData.mainSite
+                  },
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: professionalData.location.split(", ")[0],
+                    addressRegion: professionalData.location.split(", ")[1],
+                    addressCountry: "BR",
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  url: professionalData.mainSite,
+                  name: "LKS Data",
+                  alternateName: "Soluções em Dados de Alto Impacto",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: `${professionalData.mainSite}/search?q={search_term_string}`,
+                    "query-input": "required name=search_term_string"
+                  }
+                },
+                {
+                  "@type": "Service",
+                  name: "Consultoria em Análise de Dados",
+                  serviceType: "Consultoria em Business Intelligence",
+                  description: "Serviços especializados em análise de dados, Power BI, ETL e Big Data para otimizar suas decisões de negócio.",
+                  provider: {
+                    "@type": "Person",
+                    name: professionalData.name,
+                  },
+                  areaServed: {
+                    "@type": "Place",
+                    name: professionalData.location 
+                  },
+                  url: professionalData.mainSite + "#services", // Link para a seção de serviços
+                }
+              ]
             }),
           }}
         />
 
         {/* Otimizações de Performance */}
+        {/* Pré-conexão para domínios externos usados, como analytics */}
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // Prefetching de links em hover para melhorar a navegação
               document.addEventListener('mouseover', function(e) {
                 const link = e.target.closest('a');
                 if (link && link.href && link.hostname === location.hostname) {
@@ -124,6 +192,7 @@ export default function RootLayout({ children }) {
                 }
               });
 
+              // Prevenção de double-tap em dispositivos móveis
               let lastTap = 0;
               document.addEventListener('touchend', function(event) {
                 const now = Date.now();
@@ -133,6 +202,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+
       </head>
       <body className="antialiased min-h-screen w-full overflow-x-hidden">
         {children}
@@ -142,8 +212,8 @@ export default function RootLayout({ children }) {
           <span itemProp="name">{professionalData.name}</span>
           <span itemProp="jobTitle">{professionalData.role}</span>
           <span itemProp="knowsAbout">{professionalData.skills.join(", ")}</span>
-          <a itemProp="url" href={professionalData.site}>
-            {professionalData.site}
+          <a itemProp="url" href={professionalData.mainSite}>
+            {professionalData.mainSite}
           </a>
           <div itemProp="contributor" itemScope itemType="https://schema.org/Person">
             <span itemProp="name">Emilly Budri Bognar</span>

@@ -12,6 +12,7 @@ import {
   Layers,
   HardDrive,
   Globe,
+  Clock
 } from 'lucide-react';
 import ProjectHeader from '@/components/ProjectHeader';
 import HeroSection from '@/components/HeroProject';
@@ -25,154 +26,125 @@ const ProjectDetailPage = () => {
 
   // Objeto para armazenar as traduções do "systemTag"
   const systemTagTranslations = {
-    pt: 'SISTEMA DISTRIBUÍDO',
-    en: 'DISTRIBUTED SYSTEM',
+    pt: 'GERAÇÃO DE GRÁFICOS',
+    en: 'GRAPHIC GENERATION',
   };
 
   // Objeto 'project' contém todos os dados do projeto exibidos na página.
   const project = {
-    // Título do projeto. Forneça o título em português e inglês.
     title: {
-      pt: 'Plataforma de Microsserviços de Alta Performance',
-      en: 'High-Performance Microservices Platform',
+      pt: 'Análise Exploratória de Dados de Vendas com Python',
+      en: 'Exploratory Sales Data Analysis with Python',
     },
-    // Slogan ou frase de efeito curta que resume o projeto. Exemplo: 'Inovando a forma como interagimos com [Tecnologia/Setor]'
     tagline: {
-      pt: 'Orquestração de transações críticas com latência ultrabaixa e resiliência excepcional.',
-      en: 'Orchestration of critical transactions with ultra-low latency and exceptional resilience.',
+      pt: 'Extraindo padrões de receita e otimizando decisões comerciais com ciência de dados.',
+      en: 'Extracting revenue patterns and optimizing business decisions with data science.',
     },
-    // Descrição detalhada do projeto. Apresente o problema que resolve e a solução.
     description: {
-      pt: 'Solução arquitetural robusta projetada para modernizar sistemas legados, eliminando gargalos de performance e garantindo consistência transacional em ambientes distribuídos. Implementação focada em alta disponibilidade, escalabilidade horizontal e compliance regulatório.', // Exemplo: 'Este projeto oferece uma solução completa para [problema], utilizando [principais tecnologias] para [benefícios].'
-      en: 'Robust architectural solution designed to modernize legacy systems, eliminating performance bottlenecks and ensuring transactional consistency in distributed environments. Implementation focused on high availability, horizontal scalability, and regulatory compliance.', // Example: 'This project provides a comprehensive solution for [problem], utilizing [key technologies] to [benefits].'
+      pt: 'Este projeto utiliza Python e bibliotecas como Pandas, Matplotlib e Seaborn para explorar dados de vendas. Com foco em geração de insights, são identificados padrões de receita, produtos mais lucrativos e sazonalidade para embasar decisões estratégicas.',
+      en: 'This project leverages Python and libraries such as Pandas, Matplotlib, and Seaborn to explore sales data. Focused on generating insights, it identifies revenue patterns, top-performing products, and seasonality to support strategic decision-making.',
     },
-    // Lista das tecnologias, linguagens e ferramentas utilizadas no projeto. Mantenha os nomes em inglês, pois geralmente não são traduzidos.
     technologies: [
-      'Kubernetes',
-      'gRPC',
-      'Apache Kafka',
-      'Redis Cluster',
-      'PostgreSQL',
-      'Golang',
-      'Node.js'
-      // Adicione mais tecnologias conforme necessário.
+      'Python',
+      'Pandas',
+      'Matplotlib',
+      'Seaborn',
+      'Jupyter Notebook',
+      'Git',
+      'Google Colab',
     ],
-    // Métricas chave ou resultados alcançados pelo projeto.
-    // Cada métrica inclui um rótulo (traduzível), valor, classe de cor para estilização e um ícone.
     metrics: [
       {
-        label: { pt: 'Latência Média', en: 'Average Latency' }, // Rótulo da métrica.
-        value: '2.4ms',                                           // Valor da métrica (string).
-        colorClass: 'text-blue-500',
-        icon: <Zap className="w-5 h-5" />,
-      },
-      {
-        label: { pt: 'Disponibilidade', en: 'Availability' },
-        value: '99.999%',
-        colorClass: 'text-green-400',
-        icon: <ShieldCheck className="w-5 h-5" />,
-      },
-      {
-        label: { pt: 'TPS Máximo', en: 'Max TPS' },
-        value: '20,000+',
+        label: { pt: 'Produtos Analisados', en: 'Products Analyzed' },
+        value: '1.500+',
         colorClass: 'text-blue-500',
         icon: <BarChart className="w-5 h-5" />,
       },
       {
-        label: { pt: 'Nós Cluster', en: 'Cluster Nodes' },
-        value: '24',
+        label: { pt: 'Insights Estratégicos Gerados', en: 'Strategic Insights Generated' },
+        value: '12+',
+        colorClass: 'text-green-500',
+        icon: <Zap className="w-5 h-5" />,
+      },
+      {
+        label: { pt: 'Visualizações Criadas', en: 'Visualizations Created' },
+        value: '20+',
         colorClass: 'text-purple-400',
-        icon: <Server className="w-5 h-5" />,
+        icon: <Globe className="w-5 h-5" />,
+      },
+      {
+        label: { pt: 'Tempo de Processamento', en: 'Processing Time' },
+        value: '4s',
+        colorClass: 'text-red-400',
+        icon: <Clock className="w-5 h-5" />,
       },
     ],
-    // Seções detalhadas do projeto. Cada seção deve abordar um aspecto diferente.
-    // Forneça título e conteúdo para cada seção em português e inglês.
     sections: [
       {
         title: {
-          pt: 'Contexto e Desafio de Negócio', // Título da seção.
+          pt: 'Contexto e Desafio de Negócio',
           en: 'Context and Business Challenge',
         },
-        content: {   // Conteúdo detalhado da seção.
-          pt: 'O objetivo central era a transformação de um sistema monolítico obsoleto, que não conseguia acompanhar o volume crescente de operações, em uma infraestrutura ágil e resiliente. A migração visava não apenas resolver problemas de performance e escalabilidade, mas também estabelecer uma base sólida para inovações futuras, mantendo a integridade e segurança dos dados sob as mais rigorosas exigências regulatórias.',
-          en: 'The core objective was to transform an outdated monolithic system, unable to keep pace with the increasing volume of operations, into an agile and resilient infrastructure. The migration aimed not only to resolve performance and scalability issues but also to establish a solid foundation for future innovations, maintaining data integrity and security under the most stringent regulatory requirements.',
+        content: {
+          pt: 'Uma empresa varejista buscava entender melhor os padrões de receita e desempenho dos seus produtos ao longo do tempo.\n\nRealizar uma análise exploratória que revelasse comportamentos de compra, sazonalidade e produtos mais rentáveis.\n\nUtilizamos Python com Pandas para limpeza e agregação de dados, Seaborn para visualizações e Matplotlib para análises temporais.\n\nIdentificamos que 20% dos produtos geravam 80% da receita, além de fortes picos sazonais em meses específicos, o que orientou o time comercial a ajustar o estoque e campanhas promocionais.',
+          en: 'A retail company needed to better understand revenue patterns and product performance over time.\n\nConduct an exploratory analysis to uncover buying behaviors, seasonality, and the most profitable products.\n\nWe used Python with Pandas for data cleaning and aggregation, Seaborn for visualizations, and Matplotlib for time series analysis.\n\nWe discovered that 20% of the products generated 80% of the revenue, and identified seasonal peaks, allowing the commercial team to optimize inventory and promotional campaigns.',
         },
         icon: <Globe className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/contexto.png', // Exemplo de caminho de imagem
+        imageUrl: '/images/analise-vendas1.png',
       },
       {
         title: {
-          pt: 'Arquitetura de Microsserviços e Orquestração',
-          en: 'Microservices Architecture and Orchestration',
+          pt: 'Processo de Limpeza e Preparação dos Dados',
+          en: 'Data Cleaning and Preparation Process',
         },
         content: {
-          pt: 'A implementação estratégica de uma **arquitetura de microsserviços desacoplada** foi fundamental. Cada serviço é independente, facilitando o desenvolvimento, implantação e escalabilidade. Utilizamos **Spring Boot** e **Golang** para construir serviços eficientes e leves, enquanto **Apache Kafka** garante uma comunicação assíncrona robusta e tolerante a falhas. A orquestração e o auto-scaling são gerenciados de forma eficiente pelo **Kubernetes**, garantindo alta disponibilidade e otimização de recursos.',
-          en: 'The strategic implementation of a **decoupled microservices architecture** was fundamental. Each service is independent, facilitating development, deployment, and scalability. We used **Spring Boot** and **Golang** to build efficient and lightweight services, while **Apache Kafka** ensures robust and fault-tolerant asynchronous communication. Orchestration and auto-scaling are efficiently managed by **Kubernetes**, ensuring high availability and resource optimization.',
-        },
-        icon: <Layers className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/arquitetura.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Gestão de Dados e Estratégias de Persistência',
-          en: 'Data Management and Persistence Strategies',
-        },
-        content: {
-          pt: 'A modelagem de dados foi cuidadosamente otimizada no **PostgreSQL** para garantir alta performance em consultas complexas e a integridade transacional de dados críticos. Para otimizar ainda mais o desempenho e reduzir a carga sobre o banco de dados principal, implementamos **Redis Cluster** para caching distribuído, gerenciamento de sessões e filas de eventos, assegurando respostas rápidas e uma experiência de usuário fluida.',
-          en: 'Data modeling was carefully optimized in **PostgreSQL** to ensure high performance in complex queries and transactional integrity of critical data. To further optimize performance and reduce the load on the main database, we implemented **Redis Cluster** for distributed caching, session management, and event queues, ensuring rapid responses and a fluid user experience.',
+          pt: 'Realizei um tratamento cuidadoso para remover valores nulos, corrigir formatações e padronizar categorias. Agrupamos dados por produto, mês e região para permitir análises multidimensionais. A padronização foi essencial para garantir consistência e confiabilidade nas análises.',
+          en: 'I performed careful cleaning to remove null values, fix formatting, and standardize categories. Data was grouped by product, month, and region to allow multidimensional analysis. Standardization was essential to ensure consistency and reliability in the results.',
         },
         icon: <HardDrive className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/dados.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: { pt: 'Design de APIs e Integração Contínua', en: 'API Design and Continuous Integration' },
-        content: {
-          pt: 'Desenvolvemos APIs **RESTful** e **gRPC** com contratos bem definidos, utilizando **OpenAPI/Swagger** para documentação interativa e validação. Isso garante a interoperabilidade perfeita entre os microsserviços e facilita a integração com sistemas externos. Nossas APIs são projetadas para serem intuitivas e eficientes, otimizando o consumo por parte de outras aplicações.',
-          en: 'We developed **RESTful** and **gRPC** APIs with well-defined contracts, using **OpenAPI/Swagger** for interactive documentation and validation. This ensures seamless interoperability between microservices and facilitates integration with external systems. Our APIs are designed to be intuitive and efficient, optimizing consumption by other applications.',
-        },
-        icon: <Code className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/api.png', // Exemplo de caminho de imagem
+        imageUrl: '/images/analise-vendas2.png',
       },
       {
         title: {
-          pt: 'Segurança, Compliance e Resiliência',
-          en: 'Security, Compliance, and Resilience'
+          pt: 'Visualizações e Extração de Insights',
+          en: 'Visualizations and Insight Extraction',
         },
         content: {
-          pt: 'A segurança é uma prioridade. Implementamos autenticação **OAuth2/JWT** e autorização baseada em roles. Todos os dados sensíveis são criptografados em repouso e em trânsito. Adicionalmente, o sistema é totalmente aderente a regulamentações como **GDPR/LGPD**, com auditoria completa de logs e mecanismos de resiliência a falhas para garantir a continuidade do negócio e a proteção das informações dos usuários.',
-          en: 'Security is a priority. We implemented **OAuth2/JWT** authentication and role-based authorization. All sensitive data is encrypted at rest and in transit. Additionally, the system is fully compliant with regulations such as **GDPR/LGPD**, with full log auditing and fault tolerance mechanisms to ensure business continuity and user data protection.',
-        },
-        icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/seguranca.png', // Exemplo de caminho de imagem
-      },
-      {
-        title: {
-          pt: 'Observabilidade, Monitoramento e Resposta a Incidentes',
-          en: 'Observability, Monitoring, and Incident Response',
-        },
-        content: {
-          pt: 'Para garantir a estabilidade e o bom funcionamento, configuramos o **Prometheus** para coleta de métricas em tempo real e o **Grafana** para visualização intuitiva através de dashboards personalizados. A integração com sistemas de logging centralizado permite o rastreamento proativo de erros, depuração eficiente e uma resposta rápida a qualquer incidente, minimizando o tempo de inatividade.',
-          en: 'To ensure stability and proper functioning, we configured **Prometheus** for real-time metric collection and **Grafana** for intuitive visualization through custom dashboards. Integration with centralized logging systems allows for proactive error tracing, efficient debugging, and rapid response to any incident, minimizing downtime.',
+          pt: 'Criei gráficos de linha, barras e heatmaps para visualizar tendências mensais, produtos com maior receita e sazonalidade. Cada visualização foi pensada para responder a uma pergunta de negócio específica, como: "Quais produtos mais vendem em dezembro?" ou "Existe queda de receita em meses específicos?".',
+          en: 'I built line charts, bar plots, and heatmaps to visualize monthly trends, top revenue-generating products, and seasonality. Each visualization was designed to answer a specific business question, such as "Which products sell the most in December?" or "Is there a drop in revenue in certain months?"',
         },
         icon: <BarChart className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/monitoramento.png', // Exemplo de caminho de imagem
+        imageUrl: '/images/analise-vendas3.png',
       },
       {
         title: {
-          pt: 'Automação de Deploy e Infraestrutura como Código (IaC)',
-          en: 'Deployment Automation and Infrastructure as Code (IaC)',
+          pt: 'Impacto no Negócio e Resultados',
+          en: 'Business Impact and Results',
         },
         content: {
-          pt: 'Nosso processo de desenvolvimento é suportado por um pipeline de CI/CD automatizado, utilizando **Jenkins** para builds, testes e deployments contínuos e sem interrupções em ambientes **Kubernetes**. A infraestrutura é gerenciada como código (**Terraform**), garantindo consistência, reprodutibilidade e agilidade no provisionamento de recursos, do desenvolvimento à produção.',
-          en: 'Our development process is supported by an automated CI/CD pipeline, using **Jenkins** for continuous and uninterrupted builds, tests, and deployments in **Kubernetes** environments. Infrastructure is managed as code (**Terraform**), ensuring consistency, reproducibility, and agility in resource provisioning, from development to production.',
+          pt: 'A análise permitiu à empresa antecipar picos de demanda, melhorar o planejamento de estoque e redirecionar campanhas de marketing para produtos mais lucrativos. Como resultado, foi observado um aumento de 17% na margem de lucro em meses críticos e uma redução de 23% em produtos encalhados.',
+          en: 'The analysis enabled the company to anticipate demand peaks, improve inventory planning, and redirect marketing efforts to more profitable products. As a result, a 17% increase in profit margin was observed in critical months, along with a 23% reduction in unsold inventory.',
         },
-        icon: <Cloud className="w-6 h-6 text-blue-500" />,
-        imageUrl: '/images/deploy.png', // Exemplo de caminho de imagem
+        icon: <Zap className="w-6 h-6 text-blue-500" />,
+        imageUrl: '/images/analise-vendas4.png',
       },
-      // Adicione mais seções para cobrir outros aspectos do projeto, como resultados, aprendizados, etc.
+      {
+        title: {
+          pt: 'Lições Aprendidas e Melhoria Contínua',
+          en: 'Lessons Learned and Continuous Improvement',
+        },
+        content: {
+          pt: 'Aprendi que dados bem estruturados são a chave para decisões assertivas. Também foi essencial iterar com o time de negócios para validar hipóteses e adaptar os dashboards conforme novas demandas surgiam. Esse ciclo contínuo de análise reforça a cultura data-driven.',
+          en: 'I have learned that well-structured data is key to accurate decision-making. It was also essential to iterate with the business team to validate hypotheses and adapt dashboards as new demands emerged. This continuous analysis cycle reinforces a data-driven culture.',
+        },
+        icon: <Code className="w-6 h-6 text-blue-500" />,
+        imageUrl: '/images/analise-vendas5.png',
+      },
     ],
-    repositoryUrl: 'https://github.com/example/microservices-platform',
+    repositoryUrl: 'https://github.com/luca490/analise_vendas',
   };
+
+
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-sans antialiased overflow-hidden">
